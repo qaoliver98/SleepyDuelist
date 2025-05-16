@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sleepy Duelist</title>
+    <style>
+        /* CSS Styles - Dark Magician Girl Theme */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f2e6ff; /* Light lavender background */
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background-color: #9370db; /* Medium purple */
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(147, 112, 219, 0.3);
+        }
+
+        /* Header buttons styles */
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .header-btn {
+            background-color: #ffb7c5; /* Light pink */
+            color: #5a3b76; /* Dark purple */
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(255, 183, 197, 0.3);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .header-btn:hover {
+            background-color: #ff9eb5; /* Slightly darker pink */
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(255, 183, 197, 0.5);
+        }
+        
+        /* Dark theme for header buttons */
+        body.dark-theme .header-btn {
+            background-color: #d8b5ff; /* Light purple */
+            color: #3a2158; /* Dark purple */
+            box-shadow: 0 2px 4px rgba(216, 181, 255, 0.3);
+        }
+        
+        body.dark-theme .header-btn:hover {
+            background-color: #c6a0fc; /* Slightly darker light purple */
+        }
+        
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .content-container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 2rem;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #ff85a2; /* Soft pink */
+            text-align: center;
+        }
+        
+        footer {
+            background-color: #9370db; /* Medium purple */
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: auto;
+            box-shadow: 0 -4px 8px rgba(147, 112, 219, 0.3);
+        }
+        
+        /* Dark theme - Now Dark Magician Girl night theme */
+        body.dark-theme {
+            background-color: #2e1c45; /* Dark purple background */
+            color: #e6f2ff; /* Light blue text */
+        }
+        
+        body.dark-theme .page-title {
+            color: #ffb7c5; /* Light pink */
+        }
+        
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #9370db; /* Medium purple */
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(147, 112, 219, 0.6);
+            transition: background-color 0.3s;
+            z-index: 100;
+        }
+        
+        .theme-toggle:hover {
+            background-color: #8465be; /* Slightly darker purple */
+        }
+        
+        /* Common button style */
+        .primary-btn {
+            display: inline-block;
+            background-color: #9370db; /* Medium purple */
+            color: white;
+            padding: 0.8rem 1.5rem;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 8px rgba(147, 112, 219, 0.4);
+            border: none;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+        
+        .primary-btn:hover {
+            background-color: #8465be; /* Slightly darker purple */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(147, 112, 219, 0.6);
+        }
+        
+        /* Card-like component */
+        .card {
+            background-color: #e6f2ff; /* Light blue */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(147, 112, 219, 0.25);
+            margin-bottom: 2rem;
+            border: 2px solid #d8b5ff; /* Light purple border */
+        }
+        
+        body.dark-theme .card {
+            background-color: #3a2158; /* Slightly lighter purple */
+            color: #e6f2ff; /* Light blue text */
+            border-color: #9370db; /* Medium purple border */
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .content-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%;">
+            <div class="header-buttons">
+                <a href="index.html" class="header-btn">Home</a>
+                <a href="generator.html" class="header-btn">Generator</a>
+                <a href="thankyou.html" class="header-btn">Thank You</a>
+            </div>
+            <h1>ABOUT</h1>
+            <div style="width: 200px;"><!-- Empty div for balance --></div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="content-container">
+            <h2 class="page-title">About Section</h2>
+            
+            <!-- Your page content goes here -->
+            <div class="card">
+                <h3>Sleepy Duelist</h3>
+                <p>I know nothing about Yu-Gi-Oh! except that the names of cards are kind of funny. After playing a spoken version of this in Discord with friends, I decided to turn it into a game because it's fun.</p>
+            </div>
+            
+            <div class="card">
+                <h3>How to use the Generator</h3>
+                <p>Just click the button to use sample data, then start generating. It will generate up to 1000 results.</p>
+            </div>
+
+            <div class="card">
+                <h3>Blah blah blah</h3>
+                <p>Place holder text c:</p>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>2025 _volts</p>
+        <small>I am not affiliated with Konami and do not own or claim any rights to any Konami trademark or the Yu-Gi-Oh! trademark, and all references to such are used for commentary and informational purposes only.</small>
+    </footer>
+    
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+    
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-theme');
+            themeToggle.textContent = '☀️';
+        } else if (savedTheme === 'light') {
+            body.classList.remove('dark-theme');
+            themeToggle.textContent = '🌙';
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            body.classList.add('dark-theme');
+            themeToggle.textContent = '☀️';
+        }
+        
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-theme')) {
+                body.classList.remove('dark-theme');
+                themeToggle.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.add('dark-theme');
+                themeToggle.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>
