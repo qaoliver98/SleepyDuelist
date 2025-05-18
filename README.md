@@ -1,3 +1,3 @@
 # SleepyDuelist
 
-https://qaoliver98.github.io/SleepyDuelist/
+https://voltsq98.github.io/SleepyDuelist/
