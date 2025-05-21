@@ -1156,8 +1156,32 @@
                             isProcessing = false; // Reset processing flag for next question
                         }, 1800); // Increased from 1000ms to 2000ms
                     }
+                
+                    // Add click event listeners to all option boxes
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        handleOptionClick(this, options);
+                    });
+                    
+                    // Add touch events for mobile devices
+                    option.addEventListener('touchstart', function(e) {
+                        this.classList.add('button-active');
+                    }, { passive: true });
+                    
+                    option.addEventListener('touchend', function(e) {
+                        e.preventDefault(); // Prevent default behavior
+                        this.classList.remove('button-active');
+                        handleOptionClick(this, options);
+                    });
+                });
+                
+                // Add the selection boxes to the touch listeners collection
+                addTouch
+                
                 }
             }
+
+        
 
         // Function to add touch event listeners to elements
         function addTouchListeners(elements) {
