@@ -513,77 +513,6 @@
             }
 
 
-            /* Additional styles for touchscreen devices */
-            /* General touch-friendly improvements */
-            .touchscreen button, 
-            .touchscreen .selection-box, 
-            .touchscreen .header-btn {
-                cursor: pointer;
-                -webkit-tap-highlight-color: transparent; /* Remove default highlight on tap */
-                touch-action: manipulation; /* Disable double-tap zoom */
-            }
-
-            /* Active state styling for touch feedback */
-            .touchscreen button.button-active, 
-            .touchscreen .selection-box.button-active,
-            .touchscreen .header-btn.button-active {
-                transform: scale(0.97);
-                opacity: 0.9;
-                transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out;
-            }
-
-            /* Adjusted spacing for touch targets */
-            .touchscreen .selection-box {
-                margin-bottom: 15px;
-            }
-
-            .touchscreen .difficulty-btn {
-                min-width: 90px;
-                min-height: 44px; /* Apple's recommended minimum for touch targets */
-            }
-
-            /* Fix for fixed positioning on mobile */
-            .touchscreen .game-over-overlay {
-                position: fixed;
-                height: 100%;
-                height: calc(var(--vh, 1vh) * 100);
-            }
-
-            /* Fix iOS momentum scrolling */
-            .touchscreen {
-                -webkit-overflow-scrolling: touch;
-            }
-
-            /* Stacked mobile layout for game controls */
-            @media (max-width: 768px) {
-                .mobile-controls-container {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 10px;
-                    width: 100%;
-                    margin-bottom: 15px;
-                }
-                
-                /* Redesigned score display for mobile */
-                .touchscreen .score-display {
-                    border-radius: 8px;
-                    box-shadow: 0 2px 6px rgba(255, 204, 153, 0.4);
-                }
-                
-                /* Ensure buttons are spaced properly on touch devices */
-                .touchscreen .play-again-btn,
-                .touchscreen .share-score-btn {
-                    margin: 8px;
-                    min-height: 50px;  /* Larger touch target */
-                }
-                
-                /* Prevent text selection on mobile */
-                .touchscreen .selection-box p {
-                    user-select: none;
-                    -webkit-user-select: none;
-                }
-            }
-
         /* Responsive design - Also do not add any CSS below this comment lmao */
         @media (max-width: 768px) {
             .home-title {
@@ -793,6 +722,77 @@
             main {
                 min-height: 70vh;
                 min-height: -webkit-fill-available;
+            }
+        }
+
+        /* Additional styles for touchscreen devices */
+        /* General touch-friendly improvements */
+        .touchscreen button, 
+        .touchscreen .selection-box, 
+        .touchscreen .header-btn {
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent; /* Remove default highlight on tap */
+            touch-action: manipulation; /* Disable double-tap zoom */
+        }
+
+        /* Active state styling for touch feedback */
+        .touchscreen button.button-active, 
+        .touchscreen .selection-box.button-active,
+        .touchscreen .header-btn.button-active {
+            transform: scale(0.97);
+            opacity: 0.9;
+            transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out;
+        }
+
+        /* Adjusted spacing for touch targets */
+        .touchscreen .selection-box {
+            margin-bottom: 15px;
+        }
+
+        .touchscreen .difficulty-btn {
+            min-width: 90px;
+            min-height: 44px; /* Apple's recommended minimum for touch targets */
+        }
+
+        /* Fix for fixed positioning on mobile */
+        .touchscreen .game-over-overlay {
+            position: fixed;
+            height: 100%;
+            height: calc(var(--vh, 1vh) * 100);
+        }
+
+        /* Fix iOS momentum scrolling */
+        .touchscreen {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Stacked mobile layout for game controls */
+        @media (max-width: 768px) {
+            .mobile-controls-container {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            /* Redesigned score display for mobile */
+            .touchscreen .score-display {
+                border-radius: 8px;
+                box-shadow: 0 2px 6px rgba(255, 204, 153, 0.4);
+            }
+            
+            /* Ensure buttons are spaced properly on touch devices */
+            .touchscreen .play-again-btn,
+            .touchscreen .share-score-btn {
+                margin: 8px;
+                min-height: 50px;  /* Larger touch target */
+            }
+            
+            /* Prevent text selection on mobile */
+            .touchscreen .selection-box p {
+                user-select: none;
+                -webkit-user-select: none;
             }
         }
 
