@@ -28,65 +28,98 @@
 
     <title>Real or Fake: Yu-Gi-Oh!</title>
     <style>
-        /* CSS Styles - Dark Magician Girl Theme */
+       /* Dark Magician Girl Theme CSS
+        * A clean, well-organized structure for the game */
+
+        /* ==========================================
+        Core Elements & Global Styles
+        ========================================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Arial', sans-serif;
         }
-        
+
+        :root {
+            /* Color Variables */
+            --light-lavender: #f2e6ff;
+            --medium-purple: #9370db;
+            --light-purple: #d8b5ff;
+            --dark-purple: #5a3b76;
+            --deep-purple: #2e1c45;
+            --darker-purple: #3a2158;
+            --deeper-purple: #43275a;
+            --soft-pink: #ff85a2;
+            --light-pink: #ffb7c5;
+            --darker-pink: #ff9eb5;
+            --dark-pink: #993344;
+            --light-blue: #e6f2ff;
+            --soft-gold: #ffcc99;
+            --light-gold: #ffebcc;
+            --dark-gold: #996633;
+            --pastel-green: #9ee2a2;
+            --dark-green: #2e6934;
+            
+            /* Shadows */
+            --purple-shadow: rgba(147, 112, 219, 0.3);
+            --purple-shadow-medium: rgba(147, 112, 219, 0.4);
+            --purple-shadow-strong: rgba(147, 112, 219, 0.6);
+            --pink-shadow: rgba(255, 183, 197, 0.3);
+            --pink-shadow-medium: rgba(255, 183, 197, 0.4);
+            --pink-shadow-strong: rgba(255, 183, 197, 0.6);
+            --gold-shadow: rgba(255, 204, 153, 0.4);
+            --gold-shadow-strong: rgba(255, 204, 153, 0.5);
+            
+            /* Calculate viewport height correctly for mobile */
+            --vh: 1vh;
+        }
+
         body {
-            background-color: #f2e6ff; /* Light lavender background */
+            background-color: var(--light-lavender);
             color: #333;
             line-height: 1.6;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
-        
+
+        /* ==========================================
+        Header Styles
+        ========================================== */
         header {
-            background-color: #9370db; /* Medium purple */
+            background-color: var(--medium-purple);
             color: white;
             padding: 1.5rem 0;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(147, 112, 219, 0.3);
+            box-shadow: 0 4px 8px var(--purple-shadow);
         }
 
-        /* Header buttons styles */
         .header-buttons {
             display: flex;
             gap: 10px;
         }
-        
+
         .header-btn {
-            background-color: #ffb7c5; /* Light pink */
-            color: #5a3b76; /* Dark purple */
+            background-color: var(--light-pink);
+            color: var(--dark-purple);
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
             text-decoration: none;
             font-weight: bold;
-            box-shadow: 0 2px 4px rgba(255, 183, 197, 0.3);
+            box-shadow: 0 2px 4px var(--pink-shadow);
             transition: background-color 0.3s, transform 0.2s;
         }
-        
+
         .header-btn:hover {
-            background-color: #ff9eb5; /* Slightly darker pink */
+            background-color: var(--darker-pink);
             transform: translateY(-2px);
-            box-shadow: 0 3px 6px rgba(255, 183, 197, 0.5);
+            box-shadow: 0 3px 6px var(--pink-shadow-medium);
         }
-        
-        /* Dark theme for header buttons */
-        body.dark-theme .header-btn {
-            background-color: #d8b5ff; /* Light purple */
-            color: #3a2158; /* Dark purple */
-            box-shadow: 0 2px 4px rgba(216, 181, 255, 0.3);
-        }
-        
-        body.dark-theme .header-btn:hover {
-            background-color: #c6a0fc; /* Slightly darker light purple */
-        }
-        
+
+        /* ==========================================
+        Main Content Area
+        ========================================== */
         main {
             flex: 1;
             display: flex;
@@ -94,18 +127,33 @@
             align-items: center;
             padding: 2rem;
         }
-        
+
+        /* Home Page Styles */
         .home-container {
             text-align: center;
             max-width: 600px;
         }
-        
+
         .home-title {
             font-size: 3rem;
             margin-bottom: 2rem;
-            color: #ff85a2; /* Soft pink */
+            color: var(--soft-pink);
         }
-        
+
+        .last-score {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: var(--light-gold);
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 6px var(--gold-shadow);
+            color: var(--dark-gold);
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: none; /* Hidden initially */
+            border: 1px solid var(--soft-gold);
+        }
+
+        /* Difficulty Buttons */
         .difficulty-container {
             display: flex;
             justify-content: center;
@@ -113,10 +161,10 @@
             margin: 2rem 0;
             flex-wrap: wrap;
         }
-        
+
         .difficulty-btn {
-            background-color: #ffb7c5; /* Light pink */
-            color: #5a3b76; /* Dark purple */
+            background-color: var(--light-pink);
+            color: var(--dark-purple);
             padding: 0.8rem 1.5rem;
             font-size: 1.2rem;
             border: none;
@@ -124,23 +172,23 @@
             cursor: pointer;
             transition: background-color 0.3s, transform 0.2s;
             font-weight: bold;
-            box-shadow: 0 3px 6px rgba(255, 183, 197, 0.3);
+            box-shadow: 0 3px 6px var(--pink-shadow);
         }
-        
+
         .difficulty-btn:hover {
-            background-color: #ff9eb5; /* Slightly darker pink */
+            background-color: var(--darker-pink);
             transform: translateY(-3px);
         }
-        
+
         .difficulty-btn.active {
-            background-color: #9370db; /* Medium purple */
+            background-color: var(--medium-purple);
             color: white;
             transform: scale(1.05);
         }
-        
+
         .begin-btn {
             display: inline-block;
-            background-color: #9370db; /* Medium purple */
+            background-color: var(--medium-purple);
             color: white;
             padding: 1rem 3rem;
             font-size: 1.5rem;
@@ -148,23 +196,25 @@
             border-radius: 0.5rem;
             font-weight: bold;
             transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 4px 8px rgba(147, 112, 219, 0.4);
+            box-shadow: 0 4px 8px var(--purple-shadow-medium);
             border: none;
             cursor: pointer;
         }
-        
+
         .begin-btn:hover {
             background-color: #8465be; /* Slightly darker purple */
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(147, 112, 219, 0.6);
+            box-shadow: 0 6px 12px var(--purple-shadow-strong);
         }
-        
+
         .begin-btn:active {
             transform: translateY(1px);
-            box-shadow: 0 2px 4px rgba(147, 112, 219, 0.4);
+            box-shadow: 0 2px 4px var(--purple-shadow-medium);
         }
-        
-        /* Styles for the selection page */
+
+        /* ==========================================
+        Game Selection and Content Styles
+        ========================================== */
         .game-content {
             display: flex;
             flex-direction: column;
@@ -172,7 +222,7 @@
             width: 100%;
             max-width: 1200px;
         }
-        
+
         .selection-container {
             display: flex;
             justify-content: center;
@@ -181,68 +231,69 @@
             width: 100%;
             margin-bottom: 2rem;
         }
-        
+
         .selection-box {
-            background-color: #e6f2ff; /* Light blue */
+            background-color: var(--light-blue);
             padding: 2.5rem;
             border-radius: 0.5rem;
-            box-shadow: 0 4px 12px rgba(147, 112, 219, 0.25);
+            box-shadow: 0 4px 12px var(--purple-shadow);
             width: 100%;
             max-width: 350px;
             text-align: center;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
-            border: 2px solid #d8b5ff; /* Light purple border */
+            border: 2px solid var(--light-purple);
         }
-        
+
         .selection-box:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(147, 112, 219, 0.4);
-            border-color: #9370db; /* Medium purple border on hover */
+            box-shadow: 0 8px 16px var(--purple-shadow-medium);
+            border-color: var(--medium-purple);
         }
-        
+
         .selection-box h2 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: #9370db; /* Medium purple */
+            color: var(--medium-purple);
         }
-        
+
         .selection-box p {
             font-size: 1.6rem;
             margin-bottom: 1rem;
             font-weight: bold;
-            color: #5a3b76; /* Dark purple */
+            color: var(--dark-purple);
         }
-        
-        /* UPDATED: More prominent score display */
+
+        /* ==========================================
+        Game UI Elements
+        ========================================== */
         .score-display {
             position: fixed;
             top: 80px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #ffcc99; /* Soft gold */
-            color: #5a3b76; /* Dark purple */
+            background-color: var(--soft-gold);
+            color: var(--dark-purple);
             padding: 0.8rem 2rem;
             border-radius: 0.5rem;
             font-weight: bold;
-            box-shadow: 0 4px 8px rgba(255, 204, 153, 0.5);
+            box-shadow: 0 4px 8px var(--gold-shadow-strong);
             font-size: 1.5rem;
             z-index: 100;
         }
-        
+
         .difficulty-display {
             position: absolute;
             top: 20px;
             right: 20px;
-            background-color: #ff85a2; /* Soft pink */
+            background-color: var(--soft-pink);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
             font-weight: bold;
             box-shadow: 0 2px 6px rgba(255, 133, 162, 0.4);
         }
-        
-        /* UPDATED: Lives container positioned below choices */
+
         .lives-container {
             width: 100%;
             display: flex;
@@ -252,109 +303,35 @@
             gap: 1rem;
             text-align: center;
         }
-        
+
         .life {
-            color: #ff85a2; /* Soft pink */
+            color: var(--soft-pink);
             font-size: 2rem;
             filter: drop-shadow(0 2px 4px rgba(255, 133, 162, 0.4));
         }
-        
+
         .menu-btn {
             position: absolute;
             top: 20px;
             left: 20px;
-            background-color: #9370db; /* Medium purple */
+            background-color: var(--medium-purple);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
             font-weight: bold;
-            box-shadow: 0 2px 6px rgba(147, 112, 219, 0.4);
+            box-shadow: 0 2px 6px var(--purple-shadow-medium);
             cursor: pointer;
             border: none;
             transition: background-color 0.3s;
         }
-        
+
         .menu-btn:hover {
             background-color: #8465be; /* Slightly darker purple */
         }
-        
-        /* ADDED: Last score display on home screen */
-        .last-score {
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background-color: #ffebcc; /* Very light gold */
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 6px rgba(255, 204, 153, 0.4);
-            color: #996633; /* Dark gold */
-            font-weight: bold;
-            font-size: 1.2rem;
-            display: none; /* Hidden initially */
-            border: 1px solid #ffcc99; /* Light gold border */
-        }
-        
-        footer {
-            background-color: #9370db; /* Medium purple */
-            color: white;
-            text-align: center;
-            padding: 1.5rem 0;
-            margin-top: auto;
-            box-shadow: 0 -4px 8px rgba(147, 112, 219, 0.3);
-        }
-        
-        /* Dark theme - Now Dark Magician Girl night theme */
-        body.dark-theme {
-            background-color: #2e1c45; /* Dark purple background */
-            color: #e6f2ff; /* Light blue text */
-        }
-        
-        body.dark-theme .home-title {
-            color: #ffb7c5; /* Light pink */
-        }
-        
-        body.dark-theme .selection-box {
-            background-color: #3a2158; /* Slightly lighter purple */
-            color: #e6f2ff; /* Light blue text */
-            border-color: #9370db; /* Medium purple border */
-        }
-        
-        body.dark-theme .selection-box h2 {
-            color: #d8b5ff; /* Light purple */
-        }
-        
-        body.dark-theme .selection-box p {
-            color: #e6f2ff; /* Light blue text */
-        }
-        
-        /* Updated dark theme for last score */
-        body.dark-theme .last-score {
-            background-color: #43275a; /* Deep purple */
-            color: #ffcc99; /* Soft gold */
-            border-color: #9370db; /* Medium purple */
-        }
-        
-        /* Theme toggle */
-        .theme-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #9370db; /* Medium purple */
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(147, 112, 219, 0.6);
-            transition: background-color 0.3s;
-            z-index: 100;
-        }
-        
-        .theme-toggle:hover {
-            background-color: #8465be; /* Slightly darker purple */
-        }
-        
-        /* Feedback notification styles */
+
+        /* ==========================================
+        Notification and Feedback Elements
+        ========================================== */
         .notification {
             position: fixed;
             top: 150px;
@@ -364,27 +341,51 @@
             border-radius: 8px;
             color: white;
             font-weight: bold;
-            box-shadow: 0 4px 12px rgba(147, 112, 219, 0.4);
+            box-shadow: 0 4px 12px var(--purple-shadow-medium);
             opacity: 0;
             transition: opacity 0.3s ease;
             z-index: 1000;
         }
-        
+
         .notification.success {
-            background-color: #9ee2a2; /* Pastel green */
-            color: #2e6934; /* Dark green */
+            background-color: var(--pastel-green);
+            color: var(--dark-green);
         }
-        
+
         .notification.error {
-            background-color: #ffb7c5; /* Light pink */
-            color: #993344; /* Dark pink */
+            background-color: var(--light-pink);
+            color: var(--dark-pink);
         }
-        
+
         .notification.show {
             opacity: 1;
         }
-        
-        /* Game over overlay */
+
+        .copy-notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(147, 112, 219, 0.9);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ==========================================
+        Game Over Overlay
+        ========================================== */
         .game-over-overlay {
             position: fixed;
             top: 0;
@@ -399,44 +400,46 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s, visibility 0.3s;
+            height: 100vh;
+            height: calc(var(--vh, 1vh) * 100);
         }
-        
+
         .game-over-overlay.show {
             opacity: 1;
             visibility: visible;
         }
-        
+
         .game-over-content {
-            background-color: #e6f2ff; /* Light blue */
+            background-color: var(--light-blue);
             padding: 3rem;
             border-radius: 10px;
             text-align: center;
             max-width: 500px;
-            box-shadow: 0 6px 24px rgba(147, 112, 219, 0.6);
-            border: 3px solid #ffcc99; /* Soft gold border */
+            box-shadow: 0 6px 24px var(--purple-shadow-strong);
+            border: 3px solid var(--soft-gold);
         }
-        
+
         .game-over-content h2 {
             font-size: 2.5rem;
-            color: #ff85a2; /* Soft pink */
+            color: var(--soft-pink);
             margin-bottom: 1.5rem;
         }
-        
+
         .game-over-content p {
             font-size: 1.5rem;
             margin-bottom: 2rem;
-            color: #5a3b76; /* Dark purple */
+            color: var(--dark-purple);
         }
-        
+
         .game-over-content .difficulty-played {
             font-size: 1.2rem;
             margin-bottom: 1rem;
-            color: #9370db; /* Medium purple */
+            color: var(--medium-purple);
             font-weight: bold;
         }
-        
+
         .play-again-btn {
-            background-color: #9370db; /* Medium purple */
+            background-color: var(--medium-purple);
             color: white;
             padding: 0.8rem 2rem;
             font-size: 1.2rem;
@@ -444,82 +447,134 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 3px 8px rgba(147, 112, 219, 0.4);
+            box-shadow: 0 3px 8px var(--purple-shadow-medium);
         }
-        
+
         .play-again-btn:hover {
             background-color: #8465be; /* Slightly darker purple */
             transform: translateY(-2px);
-            box-shadow: 0 5px 12px rgba(147, 112, 219, 0.6);
+            box-shadow: 0 5px 12px var(--purple-shadow-strong);
         }
-        
-        body.dark-theme .game-over-content {
-            background-color: #3a2158; /* Slightly lighter purple */
-            color: #e6f2ff; /* Light blue text */
-            border-color: #ffb7c5; /* Light pink border */
-        }
-        
 
         .share-score-btn {
-                background-color: #ffb7c5; /* Light pink */
-                color: #5a3b76; /* Dark purple */
-                padding: 0.8rem 2rem;
-                font-size: 1.2rem;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s, transform 0.2s;
-                box-shadow: 0 3px 8px rgba(255, 183, 197, 0.4);
-                margin-left: 10px;
-            }
+            background-color: var(--light-pink);
+            color: var(--dark-purple);
+            padding: 0.8rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 3px 8px var(--pink-shadow-medium);
+            margin-left: 10px;
+        }
 
-            .share-score-btn:hover {
-                background-color: #ff9eb5; /* Slightly darker pink */
-                transform: translateY(-2px);
-                box-shadow: 0 5px 12px rgba(255, 183, 197, 0.6);
-            }
+        .share-score-btn:hover {
+            background-color: var(--darker-pink);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px var(--pink-shadow-strong);
+        }
 
-            body.dark-theme .share-score-btn {
-                background-color: #d8b5ff; /* Light purple */
-                color: #3a2158; /* Dark purple */
-                box-shadow: 0 3px 8px rgba(216, 181, 255, 0.4);
-            }
+        /* ==========================================
+        Theme Toggle
+        ========================================== */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--medium-purple);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 10px var(--purple-shadow-strong);
+            transition: background-color 0.3s;
+            z-index: 100;
+        }
 
-            body.dark-theme .share-score-btn:hover {
-                background-color: #c6a0fc; /* Slightly darker light purple */
-            }
+        .theme-toggle:hover {
+            background-color: #8465be; /* Slightly darker purple */
+        }
 
-            /* Style for the copy notification */
-            .copy-notification {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background-color: rgba(147, 112, 219, 0.9);
-                color: white;
-                padding: 15px 30px;
-                border-radius: 8px;
-                font-weight: bold;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-                z-index: 3000;
-                opacity: 0;
-                visibility: hidden;
-                transition: opacity 0.3s, visibility 0.3s;
-            }
+        /* ==========================================
+        Footer
+        ========================================== */
+        footer {
+            background-color: var(--medium-purple);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: auto;
+            box-shadow: 0 -4px 8px var(--purple-shadow);
+        }
 
-            .copy-notification.show {
-                opacity: 1;
-                visibility: visible;
-            }
+        /* ==========================================
+        Dark Theme Styles
+        ========================================== */
+        body.dark-theme {
+            background-color: var(--deep-purple);
+            color: var(--light-blue);
+        }
 
+        body.dark-theme .home-title {
+            color: var(--light-pink);
+        }
 
-        /* Responsive design - Also do not add any CSS below this comment lmao */
-        
-        /* Enhanced Mobile Responsiveness for Sleepy Duelist */
+        body.dark-theme .selection-box {
+            background-color: var(--darker-purple);
+            color: var(--light-blue);
+            border-color: var(--medium-purple);
+        }
 
-        /* General layout improvements */
+        body.dark-theme .selection-box h2 {
+            color: var(--light-purple);
+        }
+
+        body.dark-theme .selection-box p {
+            color: var(--light-blue);
+        }
+
+        body.dark-theme .last-score {
+            background-color: var(--deeper-purple);
+            color: var(--soft-gold);
+            border-color: var(--medium-purple);
+        }
+
+        body.dark-theme .game-over-content {
+            background-color: var(--darker-purple);
+            color: var(--light-blue);
+            border-color: var(--light-pink);
+        }
+
+        body.dark-theme .header-btn {
+            background-color: var(--light-purple);
+            color: var(--darker-purple);
+            box-shadow: 0 2px 4px rgba(216, 181, 255, 0.3);
+        }
+
+        body.dark-theme .header-btn:hover {
+            background-color: #c6a0fc; /* Slightly darker light purple */
+        }
+
+        body.dark-theme .share-score-btn {
+            background-color: var(--light-purple);
+            color: var(--darker-purple);
+            box-shadow: 0 3px 8px rgba(216, 181, 255, 0.4);
+        }
+
+        body.dark-theme .share-score-btn:hover {
+            background-color: #c6a0fc; /* Slightly darker light purple */
+        }
+
+        /* ==========================================
+        Responsive Styles
+        ========================================== */
+        /* General Mobile Adjustments */
         @media (max-width: 768px) {
-            /* Adjust header layout */
+            /* Header adjustments */
             header div {
                 flex-direction: column;
                 gap: 10px;
@@ -539,13 +594,14 @@
                 justify-content: center;
             }
             
+            /* Game elements */
             .selection-box {
                 padding: 2rem;
                 max-width: 100%;
             }
             
             .selection-container {
-                gap: 10px; /* Reduced gap between options */
+                gap: 10px;
             }
             
             .score-display {
@@ -554,27 +610,24 @@
                 padding: 0.6rem 1.5rem;
             }
             
-            /* Home page adjustments */
+            /* Home page elements */
             .home-title {
                 font-size: 2rem;
                 margin-bottom: 1rem;
             }
 
             .home-container p {
-                margin-bottom: 0.8rem; /* Reduced margin */
+                margin-bottom: 0.8rem;
             }
             
             .gif-container img {
-                margin-bottom: 0.8rem; /* Reduced margin */
-            }
-            
-            .gif-container img {
-                max-height: 150px; /* Limit height of GIF */
+                margin-bottom: 0.8rem;
+                max-height: 150px;
             }
 
             .difficulty-container {
-                gap: 8px; /* Reduced gap between difficulty buttons */
-                margin: 1rem 0; /* Reduced margin */
+                gap: 8px;
+                margin: 1rem 0;
             }
             
             .difficulty-btn {
@@ -588,7 +641,7 @@
                 margin-top: 1rem;
             }
             
-            /* Game layout improvements */
+            /* Game UI repositioning */
             .score-display {
                 position: static;
                 transform: none;
@@ -618,17 +671,16 @@
                 margin-top: 10px;
             }
             
-            /* Fix the lives container on mobile */
             .lives-container {
                 margin-top: 0.3rem;
                 margin-bottom: 1rem;
             }
             
             main {
-                padding: 1rem; /* Reduced padding */
+                padding: 1rem;
             }
 
-            /* Improve selection boxes for touch */
+            /* Selection boxes for touch */
             .selection-box {
                 padding: 1.4rem 1rem;
                 margin-bottom: 10px;
@@ -654,13 +706,13 @@
                 font-size: 2rem;
             }
             
-            /* Adjust button positioning */
+            /* Button positioning */
             .play-again-btn, .share-score-btn {
                 margin: 10px 5px;
                 padding: 0.8rem 1.2rem;
             }
             
-            /* Position theme toggle better */
+            /* Theme toggle position */
             .theme-toggle {
                 bottom: 80px;
                 right: 15px;
@@ -673,8 +725,15 @@
                 width: 90%;
                 padding: 10px 15px;
             }
-
             
+            /* Mobile controls container */
+            .mobile-controls-container {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                margin-bottom: 15px;
+            }
         }
 
         /* Extra small devices */
@@ -701,7 +760,7 @@
                 font-size: 1.2rem;
             }
             
-             /* Use a grid layout for difficulty buttons on very small screens */
+            /* Grid for difficulty buttons */
             .difficulty-container {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
@@ -710,12 +769,11 @@
                 margin: 0 auto;
             }
             
-            /* Better selection boxes for the game */
             .selection-container {
                 padding: 0 5px;
             }
             
-            /* Make selection boxes more touch-friendly but compact */
+            /* Touch-friendly selection boxes */
             .selection-box {
                 display: flex;
                 align-items: center;
@@ -725,39 +783,25 @@
                 transition: transform 0.2s, background-color 0.2s;
             }
             
-            /* Better touch feedback */
-            .touchscreen .selection-box:active {
-                transform: scale(0.98);
-                opacity: 0.9;
-            }
-            
-            /* Fix for any fixed positioned elements on iOS */
-            .score-display, .difficulty-display, .notification {
+            /* Fixed position element adjustments */
+            .score-display, 
+            .difficulty-display, 
+            .notification {
                 position: relative;
                 top: auto;
                 left: auto;
                 transform: none;
             }
             
-            /* Make the lives container more compact */
             .lives-container {
                 gap: 5px;
             }
             
-            /* Mobile controls container improvements */
-            .mobile-controls-container {
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
-                margin-bottom: 8px;
-            }
-            
-            /* Make sure the game content fits without scrolling */
             .game-content {
                 padding: 0;
             }
             
-            /* Compact game over overlay */
+            /* Compact game over */
             .game-over-content {
                 padding: 1.5rem 1rem;
             }
@@ -772,20 +816,20 @@
                 margin-bottom: 1rem;
             }
             
-            .play-again-btn, .share-score-btn {
+            .play-again-btn, 
+            .share-score-btn {
                 display: block;
                 width: 90%;
                 max-width: 200px;
                 margin: 10px auto;
             }
             
-            /* Adjust notification and copy popup size */
-            .notification, .copy-notification {
+            .notification, 
+            .copy-notification {
                 font-size: 0.9rem;
                 padding: 12px;
             }
             
-            /* Better footer text scaling */
             footer small {
                 font-size: 0.75rem;
                 padding: 0 10px;
@@ -793,7 +837,7 @@
             }
         }
 
-        /* Fix for all font sizes to ensure readability on small screens */
+        /* Very small devices */
         @media (max-width: 360px) {
             .selection-box p {
                 font-size: 1rem;
@@ -817,18 +861,10 @@
             }
         }
 
-        /* Calculate full viewport height correctly on mobile */
-        :root {
-            --vh: 1vh;
-        }
-
-        /* Use the correct viewport height */
-        .game-over-overlay {
-            height: 100vh;
-            height: calc(var(--vh, 1vh) * 100);
-        }
-
-        /* Fix for iOS Safari viewport height issues */
+        /* ==========================================
+        Special Device Handling
+        ========================================== */
+        /* iOS Safari viewport height fix */
         @supports (-webkit-touch-callout: none) {
             body, html {
                 height: -webkit-fill-available;
@@ -844,17 +880,15 @@
             }
         }
 
-        /* Additional styles for touchscreen devices */
-        /* General touch-friendly improvements */
+        /* Touchscreen device optimizations */
         .touchscreen button, 
         .touchscreen .selection-box, 
         .touchscreen .header-btn {
             cursor: pointer;
-            -webkit-tap-highlight-color: transparent; /* Remove default highlight on tap */
-            touch-action: manipulation; /* Disable double-tap zoom */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
-        /* Active state styling for touch feedback */
         .touchscreen button.button-active, 
         .touchscreen .selection-box.button-active,
         .touchscreen .header-btn.button-active {
@@ -863,58 +897,46 @@
             transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out;
         }
 
-        /* Adjusted spacing for touch targets */
         .touchscreen .selection-box {
             margin-bottom: 15px;
         }
 
         .touchscreen .difficulty-btn {
             min-width: 90px;
-            min-height: 44px; /* Apple's recommended minimum for touch targets */
+            min-height: 44px;
         }
 
-        /* Fix for fixed positioning on mobile */
         .touchscreen .game-over-overlay {
             position: fixed;
             height: 100%;
             height: calc(var(--vh, 1vh) * 100);
         }
 
-        /* Fix iOS momentum scrolling */
         .touchscreen {
             -webkit-overflow-scrolling: touch;
         }
 
-        /* Stacked mobile layout for game controls */
-        @media (max-width: 768px) {
-            .mobile-controls-container {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                width: 100%;
-                margin-bottom: 15px;
-            }
-            
-            /* Redesigned score display for mobile */
-            .touchscreen .score-display {
-                border-radius: 8px;
-                box-shadow: 0 2px 6px rgba(255, 204, 153, 0.4);
-            }
-            
-            /* Ensure buttons are spaced properly on touch devices */
-            .touchscreen .play-again-btn,
-            .touchscreen .share-score-btn {
-                margin: 8px;
-                min-height: 50px;  /* Larger touch target */
-            }
-            
-            /* Prevent text selection on mobile */
-            .touchscreen .selection-box p {
-                user-select: none;
-                -webkit-user-select: none;
-            }
+        .touchscreen .score-display {
+            border-radius: 8px;
+            box-shadow: 0 2px 6px var(--gold-shadow);
         }
 
+        .touchscreen .play-again-btn,
+        .touchscreen .share-score-btn {
+            margin: 8px;
+            min-height: 50px;
+        }
+
+        .touchscreen .selection-box p {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Touch feedback */
+        .touchscreen .selection-box:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
     </style>
     <!-- Import the external card lists JavaScript file -->
     <script src="cardLists.js"></script>
