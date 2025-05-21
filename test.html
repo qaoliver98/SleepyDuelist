@@ -1076,11 +1076,20 @@
                     lives = 3;
                     navigateTo('selection');
                 });
+                
+                // Add touch event listeners for buttons on the home page
+                addTouchListeners([
+                    'easyBtn', 'mediumBtn', 'hardBtn', 'beginButton'
+                ].map(id => document.getElementById(id)));
+                
             } else if (page === 'selection') {
                 // Add click event for menu button
                 document.getElementById('menuButton').addEventListener('click', () => {
                     navigateTo('home');
                 });
+                
+                // Add touch event listener for menu button
+                addTouchListeners([document.getElementById('menuButton')]);
                 
                 // Add click events for all option boxes
                 const options = document.querySelectorAll('.selection-box');
@@ -1090,64 +1099,12 @@
 
                 options.forEach(option => {
                     option.addEventListener('click', () => {
-                        // Prevent multiple clicks while processing an answer
-                        if (isProcessing) return;
-                        
-                        // Set flag to prevent further clicks
-                        isProcessing = true;
-                        
-                        // Disable all option boxes visually
-                        options.forEach(opt => {
-                            opt.style.pointerEvents = 'none';
-                            opt.style.opacity = '0.7';
-                        });
-                        
-                        const isRealCard = option.getAttribute('data-is-real') === 'true';
-                        
-                        if (isRealCard) {
-                            // If correct
-                            score++;
-                            option.style.backgroundColor = '#9ee2a2'; // Green background
-                            option.style.borderColor = '#2e6934'; // Dark green border
-                            showNotification('Correct! That is a real card!', true);
-                        } else {
-                            // If incorrect
-                            lives--;
-                            option.style.backgroundColor = '#ffb7c5'; // Pink background
-                            option.style.borderColor = '#993344'; // Dark pink border
-                            
-                            // Find and highlight the correct answer
-                            options.forEach(opt => {
-                                if (opt.getAttribute('data-is-real') === 'true') {
-                                    opt.style.backgroundColor = '#9ee2a2'; // Green background
-                                    opt.style.borderColor = '#2e6934'; // Dark green border
-                                    
-                                    // Add a "Real Card" label
-                                    const realCardLabel = document.createElement('div');
-                                    realCardLabel.textContent = '✓ Real Card';
-                                    realCardLabel.style.color = '#2e6934';
-                                    realCardLabel.style.fontWeight = 'bold';
-                                    realCardLabel.style.marginTop = '10px';
-                                    opt.appendChild(realCardLabel);
-                                }
-                            });
-                            
-                            showNotification('Incorrect! That is NOT a real card!', false);
-                            
-                            // Check if out of lives
-                            if (lives <= 0) {
-                                showGameOver();
-                                return;
-                            }
-                        }
-                        
-                        // Longer delay before loading new question to allow player to see the correct answer
-                        setTimeout(() => {
-                            navigateTo('selection'); // Load new cards
-                            isProcessing = false; // Reset processing flag for next question
-                        }, 1800); // Increased from 1000ms to 2000ms
+                        handleOptionClick(option, options, isProcessing);
                     });
                 });
+                
+                // Add touch event listeners for selection boxes
+                addTouchListeners(Array.from(options));
                 
                 // NEW: Reposition game elements for mobile
                 repositionGameElements();
@@ -1156,7 +1113,146 @@
                 window.scrollTo(0, 0);
             }
         }
-        
+
+        // Function to handle selection box clicks
+        function handleOptionClick(option, allOptions, isProcessingRef) {
+            // Prevent multiple clicks while processing an answer
+            if (isProcessingRef) return;
+            
+            // Set flag to prevent further clicks
+            isProcessing = true;
+            
+            // Disable all option boxes visually
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+                opt.style.opacity = '0.7';
+            });
+            
+            const isRealCard = option.getAttribute('data-is-real') === 'true';
+            
+            if (isRealCard) {
+                // If correct
+                score++;
+                option.style.backgroundColor = '#9ee2a2'; // Green background
+                option.style.borderColor = '#2e6934'; // Dark green border
+                showNotification('Correct! That is a real card!', true);
+            } else {
+                // If incorrect
+                lives--;
+                option.style.backgroundColor = '#ffb7c5'; // Pink background
+                option.style.borderColor = '#993344'; // Dark pink border
+                
+                // Find and highlight the correct answer
+                allOptions.forEach(opt => {
+                    if (opt.getAttribute('data-is-real') === 'true') {
+                        opt.style.backgroundColor = '#9ee2a2'; // Green background
+                        opt.style.borderColor = '#2e6934'; // Dark green border
+                        
+                        // Add a "Real Card" label
+                        const realCardLabel = document.createElement('div');
+                        realCardLabel.textContent = '✓ Real Card';
+                        realCardLabel.style.color = '#2e6934';
+                        realCardLabel.style.fontWeight = 'bold';
+                        realCardLabel.style.marginTop = '10px';
+                        opt.appendChild(realCardLabel);
+                    }
+                });
+                
+                showNotification('Incorrect! That is NOT a real card!', false);
+                
+                // Check if out of lives
+                if (lives <= 0) {
+                    showGameOver();
+                    return;
+                }
+            }
+            
+            // Longer delay before loading new question to allow player to see the correct answer
+            setTimeout(() => {
+                navigateTo('selection'); // Load new cards
+                isProcessing = false; // Reset processing flag for next question
+            }, 1800); // Increased from 1000ms to 2000ms
+        }
+
+        // Function to add touch event listeners to elements
+        function addTouchListeners(elements) {
+            elements.forEach(element => {
+                if (!element) return; // Skip null elements
+                
+                // Remove existing touch listeners to prevent duplicates
+                element.removeEventListener('touchstart', touchStartHandler);
+                element.removeEventListener('touchend', touchEndHandler);
+                
+                // Add touch event listeners
+                element.addEventListener('touchstart', touchStartHandler, { passive: true });
+                element.addEventListener('touchend', touchEndHandler);
+            });
+        }
+
+        // Touch event handlers
+        function touchStartHandler(e) {
+            this.classList.add('button-active');
+        }
+
+        function touchEndHandler(e) {
+            e.preventDefault(); // Prevent default to avoid delay
+            this.classList.remove('button-active');
+            
+            // If this is a selection box, handle the click logic
+            if (this.classList.contains('selection-box')) {
+                const options = document.querySelectorAll('.selection-box');
+                handleOptionClick(this, options, isProcessing);
+            } else {
+                // For other buttons, trigger a click event
+                this.click();
+            }
+        }
+
+        // Improved event initialization
+        window.addEventListener('load', () => {
+            // Check if card lists are available, if not show error
+            if (typeof yugiohCards === 'undefined' || typeof fakeYugiohCards === 'undefined') {
+                console.error('Card lists not found! Make sure cardLists.js is properly loaded.');
+                alert('Error: Card lists not loaded. Please check the console for more information.');
+            } else {
+                navigateTo('home');
+                
+                // Add touch event listener for theme toggle
+                addTouchListeners([document.getElementById('themeToggle')]);
+                
+                // Add touch event listener for play again button
+                addTouchListeners([document.getElementById('playAgainButton')]);
+                
+                // Add touch event listener for share score button
+                addTouchListeners([document.getElementById('shareScoreButton')]);
+            }
+            
+            // Add touchscreen detection class to body
+            if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                document.body.classList.add('touchscreen');
+            }
+        });
+
+        // Modified play again button event handler
+        document.getElementById('playAgainButton').addEventListener('click', () => {
+            document.getElementById('gameOverOverlay').classList.remove('show');
+            navigateTo('home');
+        });
+
+        // Modified share score button event handler
+        document.getElementById('shareScoreButton').addEventListener('click', () => {
+            const shareableText = generateShareableScore();
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(shareableText)
+                .then(() => {
+                    showCopyNotification();
+                })
+                .catch(err => {
+                    console.error('Could not copy text: ', err);
+                    alert('Failed to copy to clipboard. Please try again.');
+                });
+        });
         // Function to set difficulty
         function setDifficulty(difficulty) {
             currentDifficulty = difficulty;
