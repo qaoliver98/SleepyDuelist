@@ -514,26 +514,7 @@
 
 
         /* Responsive design - Also do not add any CSS below this comment lmao */
-        @media (max-width: 768px) {
-            .home-title {
-                font-size: 2.5rem;
-            }
-            
-            .selection-box {
-                padding: 2rem;
-                max-width: 100%;
-            }
-            
-            .selection-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .score-display {
-                top: 130px;
-                font-size: 1.2rem;
-                padding: 0.6rem 1.5rem;
-            }
+        
         /* Enhanced Mobile Responsiveness for Sleepy Duelist */
 
         /* General layout improvements */
@@ -543,9 +524,13 @@
                 flex-direction: column;
                 gap: 10px;
             }
+
+            header {
+                padding: 0.8rem 0;
+            }
             
             header h1 {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
                 margin-top: 10px;
             }
             
@@ -554,20 +539,42 @@
                 justify-content: center;
             }
             
+            .selection-box {
+                padding: 2rem;
+                max-width: 100%;
+            }
+            
+            .selection-container {
+                gap: 10px; /* Reduced gap between options */
+            }
+            
+            .score-display {
+                top: 130px;
+                font-size: 1.2rem;
+                padding: 0.6rem 1.5rem;
+            }
+            
             /* Home page adjustments */
             .home-title {
                 font-size: 2rem;
-                margin-bottom: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .home-container p {
+                margin-bottom: 0.8rem; /* Reduced margin */
             }
             
             .gif-container img {
-                width: 100%;
-                max-width: 300px;
+                margin-bottom: 0.8rem; /* Reduced margin */
             }
             
+            .gif-container img {
+                max-height: 150px; /* Limit height of GIF */
+            }
+
             .difficulty-container {
-                gap: 0.6rem;
-                margin: 1.5rem 0;
+                gap: 8px; /* Reduced gap between difficulty buttons */
+                margin: 1rem 0; /* Reduced margin */
             }
             
             .difficulty-btn {
@@ -577,22 +584,24 @@
             
             .begin-btn {
                 padding: 0.8rem 2rem;
-                font-size: 1.3rem;
-                margin-top: 1.5rem;
+                font-size: 1rem;
+                margin-top: 1rem;
             }
             
             /* Game layout improvements */
             .score-display {
                 position: static;
                 transform: none;
-                margin: 10px auto;
+                padding: 0.5rem 1.2rem;
+                margin: 5px auto;
                 width: 90%;
                 max-width: 300px;
             }
             
             .difficulty-display {
                 position: static;
-                margin: 10px auto 20px;
+                padding: 0.4rem 1rem;
+                margin: 5px auto 10px;
                 width: 90%;
                 max-width: 300px;
             }
@@ -600,7 +609,7 @@
             .menu-btn {
                 position: static;
                 display: block;
-                margin: 10px auto;
+                margin: 5px auto;
                 width: 90%;
                 max-width: 300px;
             }
@@ -611,13 +620,19 @@
             
             /* Fix the lives container on mobile */
             .lives-container {
-                margin-top: 0.5rem;
+                margin-top: 0.3rem;
+                margin-bottom: 1rem;
             }
             
+            main {
+                padding: 1rem; /* Reduced padding */
+            }
+
             /* Improve selection boxes for touch */
             .selection-box {
-                padding: 1.8rem;
-                min-height: 80px;
+                padding: 1.4rem 1rem;
+                margin-bottom: 10px;
+                min-height: 60px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -658,6 +673,8 @@
                 width: 90%;
                 padding: 10px 15px;
             }
+
+            
         }
 
         /* Extra small devices */
@@ -796,7 +813,6 @@
             }
         }
 
-        }
     </style>
     <!-- Import the external card lists JavaScript file -->
     <script src="cardLists.js"></script>
