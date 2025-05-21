@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- Basic Meta Tags -->
     <meta property="og:title" content="Sleep Duelist - Yu-Gi-Oh! Quiz" />
     <meta property="og:description" content="Guess between real and fake card names, test your knowledge of Yu-Gi-Oh! cards." />
@@ -512,10 +512,31 @@
                 visibility: visible;
             }
 
+
         /* Responsive design - Also do not add any CSS below this comment lmao */
+        
+        /* Enhanced Mobile Responsiveness for Sleepy Duelist */
+
+        /* General layout improvements */
         @media (max-width: 768px) {
-            .home-title {
-                font-size: 2.5rem;
+            /* Adjust header layout */
+            header div {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            header {
+                padding: 0.8rem 0;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+                margin-top: 10px;
+            }
+            
+            .header-buttons {
+                width: 100%;
+                justify-content: center;
             }
             
             .selection-box {
@@ -524,8 +545,7 @@
             }
             
             .selection-container {
-                flex-direction: column;
-                align-items: center;
+                gap: 10px; /* Reduced gap between options */
             }
             
             .score-display {
@@ -533,9 +553,266 @@
                 font-size: 1.2rem;
                 padding: 0.6rem 1.5rem;
             }
+            
+            /* Home page adjustments */
+            .home-title {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
 
+            .home-container p {
+                margin-bottom: 0.8rem; /* Reduced margin */
+            }
+            
+            .gif-container img {
+                margin-bottom: 0.8rem; /* Reduced margin */
+            }
+            
+            .gif-container img {
+                max-height: 150px; /* Limit height of GIF */
+            }
 
+            .difficulty-container {
+                gap: 8px; /* Reduced gap between difficulty buttons */
+                margin: 1rem 0; /* Reduced margin */
+            }
+            
+            .difficulty-btn {
+                padding: 0.6rem 1rem;
+                font-size: 1rem;
+            }
+            
+            .begin-btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+                margin-top: 1rem;
+            }
+            
+            /* Game layout improvements */
+            .score-display {
+                position: static;
+                transform: none;
+                padding: 0.5rem 1.2rem;
+                margin: 5px auto;
+                width: 90%;
+                max-width: 300px;
+            }
+            
+            .difficulty-display {
+                position: static;
+                padding: 0.4rem 1rem;
+                margin: 5px auto 10px;
+                width: 90%;
+                max-width: 300px;
+            }
+            
+            .menu-btn {
+                position: static;
+                display: block;
+                margin: 5px auto;
+                width: 90%;
+                max-width: 300px;
+            }
+            
+            .game-content {
+                margin-top: 10px;
+            }
+            
+            /* Fix the lives container on mobile */
+            .lives-container {
+                margin-top: 0.3rem;
+                margin-bottom: 1rem;
+            }
+            
+            main {
+                padding: 1rem; /* Reduced padding */
+            }
+
+            /* Improve selection boxes for touch */
+            .selection-box {
+                padding: 1.4rem 1rem;
+                margin-bottom: 10px;
+                min-height: 60px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 90%;
+            }
+            
+            .selection-box p {
+                font-size: 1.4rem;
+                margin-bottom: 0;
+            }
+            
+            /* Game over overlay */
+            .game-over-content {
+                width: 90%;
+                padding: 2rem 1.5rem;
+            }
+            
+            .game-over-content h2 {
+                font-size: 2rem;
+            }
+            
+            /* Adjust button positioning */
+            .play-again-btn, .share-score-btn {
+                margin: 10px 5px;
+                padding: 0.8rem 1.2rem;
+            }
+            
+            /* Position theme toggle better */
+            .theme-toggle {
+                bottom: 80px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
+            
+            /* Notification positioning */
+            .notification {
+                width: 90%;
+                padding: 10px 15px;
+            }
+
+            
         }
+
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .home-title {
+                font-size: 1.8rem;
+            }
+            
+            .difficulty-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .selection-box p {
+                font-size: 1.2rem;
+            }
+            
+            .game-over-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .play-again-btn, .share-score-btn {
+                display: block;
+                width: 90%;
+                max-width: 200px;
+                margin: 10px auto;
+            }
+            
+            /* Adjust notification and copy popup size */
+            .notification, .copy-notification {
+                font-size: 0.9rem;
+                padding: 12px;
+            }
+            
+            /* Better footer text scaling */
+            footer small {
+                font-size: 0.75rem;
+                padding: 0 10px;
+                display: block;
+            }
+        }
+
+        /* Fix for iOS Safari viewport height issues */
+        @supports (-webkit-touch-callout: none) {
+            body, html {
+                height: -webkit-fill-available;
+            }
+            
+            body {
+                min-height: -webkit-fill-available;
+            }
+            
+            main {
+                min-height: 70vh;
+                min-height: -webkit-fill-available;
+            }
+        }
+
+        /* Additional styles for touchscreen devices */
+        /* General touch-friendly improvements */
+        .touchscreen button, 
+        .touchscreen .selection-box, 
+        .touchscreen .header-btn {
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent; /* Remove default highlight on tap */
+            touch-action: manipulation; /* Disable double-tap zoom */
+        }
+
+        /* Active state styling for touch feedback */
+        .touchscreen button.button-active, 
+        .touchscreen .selection-box.button-active,
+        .touchscreen .header-btn.button-active {
+            transform: scale(0.97);
+            opacity: 0.9;
+            transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out;
+        }
+
+        /* Adjusted spacing for touch targets */
+        .touchscreen .selection-box {
+            margin-bottom: 15px;
+        }
+
+        .touchscreen .difficulty-btn {
+            min-width: 90px;
+            min-height: 44px; /* Apple's recommended minimum for touch targets */
+        }
+
+        /* Fix for fixed positioning on mobile */
+        .touchscreen .game-over-overlay {
+            position: fixed;
+            height: 100%;
+            height: calc(var(--vh, 1vh) * 100);
+        }
+
+        /* Fix iOS momentum scrolling */
+        .touchscreen {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Stacked mobile layout for game controls */
+        @media (max-width: 768px) {
+            .mobile-controls-container {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            /* Redesigned score display for mobile */
+            .touchscreen .score-display {
+                border-radius: 8px;
+                box-shadow: 0 2px 6px rgba(255, 204, 153, 0.4);
+            }
+            
+            /* Ensure buttons are spaced properly on touch devices */
+            .touchscreen .play-again-btn,
+            .touchscreen .share-score-btn {
+                margin: 8px;
+                min-height: 50px;  /* Larger touch target */
+            }
+            
+            /* Prevent text selection on mobile */
+            .touchscreen .selection-box p {
+                user-select: none;
+                -webkit-user-select: none;
+            }
+        }
+
     </style>
     <!-- Import the external card lists JavaScript file -->
     <script src="cardLists.js"></script>
@@ -708,10 +985,19 @@
                 `;
             });
             
-            return `
-                <div class="score-display">Score: ${score}</div>
+            // Create mobile-friendly controls container
+            const controlsHTML = window.innerWidth <= 768 ? 
+                `<div class="mobile-controls-container">
+                    <button class="menu-btn" id="menuButton">Menu</button>
+                    <div class="score-display">Score: ${score}</div>
+                    <div class="difficulty-display">Difficulty: ${currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1)}</div>
+                </div>` :
+                `<div class="score-display">Score: ${score}</div>
                 <div class="difficulty-display">Difficulty: ${currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1)}</div>
-                <button class="menu-btn" id="menuButton">Menu</button>
+                <button class="menu-btn" id="menuButton">Menu</button>`;
+            
+            return `
+                ${controlsHTML}
                 <div class="game-content">
                     <div class="selection-container">
                         ${selectionBoxesHTML}
@@ -740,7 +1026,7 @@
                 
                 return `
                     <div class="home-container">
-                        <h2 class="home-title">Real or Fake: Yu-Gi-Oh! Quiz</h2>
+                        <h2 class="home-title">TEST Real or Fake: Yu-Gi-Oh! Quiz</h2>
                             
                             <div class="gif-container">
                                 <img src="https://i.imgur.com/a6uqaY7.gif" alt="Yu-Gi-Oh Card Animation" class="game-gif">
@@ -806,20 +1092,29 @@
                     lives = 3;
                     navigateTo('selection');
                 });
+                
+                // Add touch event listeners for buttons on the home page
+                addTouchListeners([
+                    'easyBtn', 'mediumBtn', 'hardBtn', 'beginButton'
+                ].map(id => document.getElementById(id)));
+                
             } else if (page === 'selection') {
                 // Add click event for menu button
                 document.getElementById('menuButton').addEventListener('click', () => {
                     navigateTo('home');
                 });
                 
+                // Add touch event listener for menu button
+                addTouchListeners([document.getElementById('menuButton')]);
+                
                 // Add click events for all option boxes
                 const options = document.querySelectorAll('.selection-box');
 
-                // Flag to prevent multiple clicks during transition
-                let isProcessing = false;
-
-                options.forEach(option => {
-                    option.addEventListener('click', () => {
+                // Global variable to track processing state
+                    let isProcessing = false;
+                    
+                    // Function to handle option box clicks
+                    function handleOptionClick(option, allOptions) {
                         // Prevent multiple clicks while processing an answer
                         if (isProcessing) return;
                         
@@ -827,7 +1122,7 @@
                         isProcessing = true;
                         
                         // Disable all option boxes visually
-                        options.forEach(opt => {
+                        allOptions.forEach(opt => {
                             opt.style.pointerEvents = 'none';
                             opt.style.opacity = '0.7';
                         });
@@ -847,7 +1142,7 @@
                             option.style.borderColor = '#993344'; // Dark pink border
                             
                             // Find and highlight the correct answer
-                            options.forEach(opt => {
+                            allOptions.forEach(opt => {
                                 if (opt.getAttribute('data-is-real') === 'true') {
                                     opt.style.backgroundColor = '#9ee2a2'; // Green background
                                     opt.style.borderColor = '#2e6934'; // Dark green border
@@ -876,11 +1171,113 @@
                             navigateTo('selection'); // Load new cards
                             isProcessing = false; // Reset processing flag for next question
                         }, 1800); // Increased from 1000ms to 2000ms
+                    }
+                
+                    // Add click event listeners to all option boxes
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        handleOptionClick(this, options);
+                    });
+                    
+                    // Add touch events for mobile devices
+                    option.addEventListener('touchstart', function(e) {
+                        this.classList.add('button-active');
+                    }, { passive: true });
+                    
+                    option.addEventListener('touchend', function(e) {
+                        e.preventDefault(); // Prevent default behavior
+                        this.classList.remove('button-active');
+                        handleOptionClick(this, options);
                     });
                 });
+                
+                // Add the selection boxes to the touch listeners collection
+                addTouch
+                
+                }
+            }
+
+        
+
+        // Function to add touch event listeners to elements
+        function addTouchListeners(elements) {
+            elements.forEach(element => {
+                if (!element) return; // Skip null elements
+                
+                // Remove existing touch listeners to prevent duplicates
+                element.removeEventListener('touchstart', touchStartHandler);
+                element.removeEventListener('touchend', touchEndHandler);
+                
+                // Add touch event listeners
+                element.addEventListener('touchstart', touchStartHandler, { passive: true });
+                element.addEventListener('touchend', touchEndHandler);
+            });
+        }
+
+        // Touch event handlers
+        function touchStartHandler(e) {
+            this.classList.add('button-active');
+        }
+
+        function touchEndHandler(e) {
+            e.preventDefault(); // Prevent default to avoid delay
+            this.classList.remove('button-active');
+            
+            // If this is a selection box, handle the click logic
+            if (this.classList.contains('selection-box')) {
+                const options = document.querySelectorAll('.selection-box');
+                handleOptionClick(this, options, isProcessing);
+            } else {
+                // For other buttons, trigger a click event
+                this.click();
             }
         }
-        
+
+        // Improved event initialization
+        window.addEventListener('load', () => {
+            // Check if card lists are available, if not show error
+            if (typeof yugiohCards === 'undefined' || typeof fakeYugiohCards === 'undefined') {
+                console.error('Card lists not found! Make sure cardLists.js is properly loaded.');
+                alert('Error: Card lists not loaded. Please check the console for more information.');
+            } else {
+                navigateTo('home');
+                
+                // Add touch event listener for theme toggle
+                addTouchListeners([document.getElementById('themeToggle')]);
+                
+                // Add touch event listener for play again button
+                addTouchListeners([document.getElementById('playAgainButton')]);
+                
+                // Add touch event listener for share score button
+                addTouchListeners([document.getElementById('shareScoreButton')]);
+            }
+            
+            // Add touchscreen detection class to body
+            if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                document.body.classList.add('touchscreen');
+            }
+        });
+
+        // Modified play again button event handler
+        document.getElementById('playAgainButton').addEventListener('click', () => {
+            document.getElementById('gameOverOverlay').classList.remove('show');
+            navigateTo('home');
+        });
+
+        // Modified share score button event handler
+        document.getElementById('shareScoreButton').addEventListener('click', () => {
+            const shareableText = generateShareableScore();
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(shareableText)
+                .then(() => {
+                    showCopyNotification();
+                })
+                .catch(err => {
+                    console.error('Could not copy text: ', err);
+                    alert('Failed to copy to clipboard. Please try again.');
+                });
+        });
         // Function to set difficulty
         function setDifficulty(difficulty) {
             currentDifficulty = difficulty;
@@ -979,7 +1376,7 @@
             }
             
             // Create shareable text
-            const shareText = `Sleepy Duelist Quiz ${difficultyEmoji}\nScore: ${finalScore}\n${emojiPattern}\nPlay at: https://www.sleepyduelist.xyz/`;
+            const shareText = `Sleepy Duelist Quiz ${difficultyEmoji}\nScore: ${finalScore}\n${emojiPattern}\nPlay at: sleepyduelist.xyz`;
             
             return shareText;
         }
@@ -991,6 +1388,95 @@
             setTimeout(() => {
                 copyNotification.classList.remove('show');
             }, 2000);
+        }
+
+        //Mobile Improvements
+        // Function to handle viewport height issues on mobile
+        function setMobileViewportHeight() {
+            // Set the --vh custom property to the viewport height
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+
+        // Call the function initially
+        setMobileViewportHeight();
+
+        // Re-calculate on resize and orientation change
+        window.addEventListener('resize', setMobileViewportHeight);
+        window.addEventListener('orientationchange', setMobileViewportHeight);
+
+        // Improve touch interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove 300ms delay on mobile devices
+            document.addEventListener('touchend', function(event) {
+                if (event.target.tagName.toLowerCase() === 'button' ||
+                    event.target.classList.contains('selection-box') ||
+                    event.target.closest('.selection-box')) {
+                    event.preventDefault();
+                }
+            }, false);
+            
+            // Add active state for touch feedback on buttons
+            const buttons = document.querySelectorAll('button, .selection-box');
+            
+            buttons.forEach(button => {
+                button.addEventListener('touchstart', function() {
+                    this.classList.add('button-active');
+                });
+                
+                button.addEventListener('touchend', function() {
+                    this.classList.remove('button-active');
+                });
+            });
+            
+            // Fix iOS input issues
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('touchstart', function(e) {
+                    e.stopPropagation();
+                });
+            });
+        });
+
+        // Function to reposition game elements based on screen size
+        function repositionGameElements() {
+            const isMobile = window.innerWidth <= 768;
+            const gameContent = document.querySelector('.game-content');
+            
+            if (gameContent) {
+                if (isMobile) {
+                    // Rearrange elements for mobile layout
+                    const menuBtn = document.getElementById('menuButton');
+                    const scoreDisplay = document.querySelector('.score-display');
+                    const difficultyDisplay = document.querySelector('.difficulty-display');
+                    
+                    if (menuBtn && scoreDisplay && difficultyDisplay) {
+                        // Move elements to the start of game content
+                        gameContent.prepend(difficultyDisplay);
+                        gameContent.prepend(scoreDisplay);
+                        gameContent.prepend(menuBtn);
+                    }
+                }
+            }
+        }
+
+        // Call this function when loading the selection page
+        function enhancedNavigateTo(page) {
+            // Original navigateTo code here...
+            
+            // Then add:
+            if (page === 'selection') {
+                // Allow a small delay for the DOM to update
+                setTimeout(repositionGameElements, 50);
+            }
+            
+            // Fix for mobile scrolling to top on new question
+            window.scrollTo(0, 0);
+        }
+
+        // Add a touchscreen detection class to body
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+            document.body.classList.add('touchscreen');
         }
     </script>
 
