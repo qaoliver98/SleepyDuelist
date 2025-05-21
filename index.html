@@ -709,7 +709,7 @@
             });
             
             return `
-                <div class="score-display">Score: ${score}/${questionCount-1}</div>
+                <div class="score-display">Score: ${score}</div>
                 <div class="difficulty-display">Difficulty: ${currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1)}</div>
                 <button class="menu-btn" id="menuButton">Menu</button>
                 <div class="game-content">
@@ -732,7 +732,7 @@
                 if (lastScore) {
                     lastScoreHTML = `
                         <div class="last-score" style="display: block;">
-                            Your last score: ${lastScore.score}/${lastScore.totalQuestions}
+                            Your last score: ${lastScore.score}
                             (Difficulty: ${lastScore.difficulty.charAt(0).toUpperCase() + lastScore.difficulty.slice(1)})
                         </div>
                     `;
@@ -943,7 +943,7 @@
 
         function generateShareableScore() {
             const finalScore = score;
-            const totalQuestions = questionCount - 1;
+            const totalQuestions = questionCount;
             const difficultyText = currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1);
             
             // Choose emoji based on difficulty
@@ -962,10 +962,9 @@
                     difficultyEmoji = '⚪'; // White circle for default
             }
             
-            // Calculate percentage score
-            const percentage = Math.floor((finalScore / totalQuestions) * 100);
+        
             
-            // Generate emoji pattern based on score percentage
+            // Generate emoji pattern based on score
             let emojiPattern = '';
             if (finalScore >= 90) {
                 emojiPattern = '⭐⭐⭐⭐⭐';
@@ -979,11 +978,8 @@
                 emojiPattern = '⭐';
             }
             
-            // Special emoji for perfect score
-            const perfectScore = finalScore === totalQuestions ? '🏆' : '';
-            
             // Create shareable text
-            const shareText = `Sleepy Duelist Quiz ${difficultyEmoji}\n${perfectScore} Score: ${finalScore}/${totalQuestions} ${perfectScore}\n${emojiPattern}\nPlay at: sleepyduelist.xyz`;
+            const shareText = `Sleepy Duelist Quiz ${difficultyEmoji}\n Score: ${finalScore}\n${emojiPattern}\nPlay at: sleepyduelist.xyz`;
             
             return shareText;
         }
