@@ -459,7 +459,60 @@
             border-color: #ffb7c5; /* Light pink border */
         }
         
-        /* Responsive design */
+
+        .share-score-btn {
+                background-color: #ffb7c5; /* Light pink */
+                color: #5a3b76; /* Dark purple */
+                padding: 0.8rem 2rem;
+                font-size: 1.2rem;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s, transform 0.2s;
+                box-shadow: 0 3px 8px rgba(255, 183, 197, 0.4);
+                margin-left: 10px;
+            }
+
+            .share-score-btn:hover {
+                background-color: #ff9eb5; /* Slightly darker pink */
+                transform: translateY(-2px);
+                box-shadow: 0 5px 12px rgba(255, 183, 197, 0.6);
+            }
+
+            body.dark-theme .share-score-btn {
+                background-color: #d8b5ff; /* Light purple */
+                color: #3a2158; /* Dark purple */
+                box-shadow: 0 3px 8px rgba(216, 181, 255, 0.4);
+            }
+
+            body.dark-theme .share-score-btn:hover {
+                background-color: #c6a0fc; /* Slightly darker light purple */
+            }
+
+            /* Style for the copy notification */
+            .copy-notification {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: rgba(147, 112, 219, 0.9);
+                color: white;
+                padding: 15px 30px;
+                border-radius: 8px;
+                font-weight: bold;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                z-index: 3000;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s, visibility 0.3s;
+            }
+
+            .copy-notification.show {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        /* Responsive design - Also do not add any CSS below this comment lmao */
         @media (max-width: 768px) {
             .home-title {
                 font-size: 2.5rem;
@@ -480,6 +533,7 @@
                 font-size: 1.2rem;
                 padding: 0.6rem 1.5rem;
             }
+
 
         }
     </style>
@@ -520,6 +574,7 @@
             <p class="difficulty-played" id="difficultyPlayed">Difficulty: Easy</p>
             <p id="finalScoreDisplay">Your final score: 0</p>
             <button id="playAgainButton" class="play-again-btn">Play Again</button>
+            <button id="shareScoreButton" class="share-score-btn">Share Score</button>
         </div>
     </div>
     
@@ -559,6 +614,21 @@
                 totalQuestions: questionCount - 1,
                 difficulty: currentDifficulty
             };
+
+            // Adds event listener for the share score button
+            document.getElementById('shareScoreButton').addEventListener('click', () => {
+                const shareableText = generateShareableScore();
+                
+                // Copy to clipboard
+                navigator.clipboard.writeText(shareableText)
+                    .then(() => {
+                        showCopyNotification();
+                    })
+                    .catch(err => {
+                        console.error('Could not copy text: ', err);
+                        alert('Failed to copy to clipboard. Please try again.');
+                    });
+            });
         }
         
         // Function to get a random card from a list
@@ -869,6 +939,66 @@
                 localStorage.setItem('theme', 'dark');
             }
         });
+
+
+        function generateShareableScore() {
+            const finalScore = score;
+            const totalQuestions = questionCount - 1;
+            const difficultyText = currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1);
+            
+            // Choose emoji based on difficulty
+            let difficultyEmoji;
+            switch(currentDifficulty) {
+                case 'easy':
+                    difficultyEmoji = '🟢'; // Green circle for easy
+                    break;
+                case 'medium':
+                    difficultyEmoji = '🟡'; // Yellow circle for medium
+                    break;
+                case 'hard':
+                    difficultyEmoji = '🔴'; // Red circle for hard
+                    break;
+                default:
+                    difficultyEmoji = '⚪'; // White circle for default
+            }
+            
+            // Calculate percentage score
+            const percentage = Math.floor((finalScore / totalQuestions) * 100);
+            
+            // Generate emoji pattern based on score percentage
+            let emojiPattern = '';
+            if (finalScore >= 90) {
+                emojiPattern = '⭐⭐⭐⭐⭐';
+            } else if (finalScore >= 50) {
+                emojiPattern = '⭐⭐⭐⭐';
+            } else if (finalScore >= 30) {
+                emojiPattern = '⭐⭐⭐';
+            } else if (finalScore >= 10) {
+                emojiPattern = '⭐⭐';
+            } else {
+                emojiPattern = '⭐';
+            }
+            
+            // Special emoji for perfect score
+            const perfectScore = finalScore === totalQuestions ? '🏆' : '';
+            
+            // Create shareable text
+            const shareText = `Sleepy Duelist Quiz ${difficultyEmoji}\n${perfectScore} Score: ${finalScore}/${totalQuestions} ${perfectScore}\n${emojiPattern}\nPlay at: sleepyduelist.xyz`;
+            
+            return shareText;
+        }
+
+        function showCopyNotification() {
+            const copyNotification = document.getElementById('copyNotification');
+            copyNotification.classList.add('show');
+            
+            setTimeout(() => {
+                copyNotification.classList.remove('show');
+            }, 2000);
+        }
     </script>
+
+    <div id="copyNotification" class="copy-notification">Score copied to clipboard!</div>
+
 </body>
 </html>
