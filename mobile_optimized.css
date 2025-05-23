@@ -573,3 +573,81 @@
     will-change: scroll-position;
   }
 }
+
+/* ==========================================
+   MOBILE HEADER FIX - HORIZONTAL LAYOUT
+   ========================================== */
+   @media screen and (max-width: 768px) {
+    .title-section {
+      display: flex;
+      flex-direction: row; /* Force horizontal layout on mobile */
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem; /* Space between image, title, image */
+    }
+    
+    .title-section h1 {
+      font-size: 1.6rem;
+      margin: 0;
+      flex-shrink: 0; /* Prevent title from shrinking */
+    }
+    
+    .header-image {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0; /* Prevent images from shrinking */
+    }
+  }
+  
+  /* ==========================================
+     DIFFICULTY SELECTION CENTERING FIX
+     ========================================== */
+  @media screen and (max-width: 768px) {
+    .difficulty-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 1.2rem 0;
+      justify-content: center; /* Center the difficulty buttons */
+      align-items: center;
+      width: 100%;
+    }
+    
+    .difficulty-btn {
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+      min-width: 70px;
+      min-height: 40px;
+      flex-shrink: 0; /* Prevent buttons from shrinking */
+    }
+  }
+  
+  /* ==========================================
+     ULTRA-SMALL DEVICES HEADER FIX (≤480px)
+     ========================================== */
+  @media screen and (max-width: 480px) {
+    .title-section {
+      gap: 0.6rem; /* Slightly smaller gap on very small screens */
+    }
+    
+    .title-section h1 {
+      font-size: 1.4rem;
+    }
+    
+    .header-image {
+      width: 26px;
+      height: 26px;
+    }
+    
+    .difficulty-container {
+      gap: 4px; /* Smaller gap on very small screens */
+    }
+    
+    .difficulty-btn {
+      padding: 0.5rem 0.8rem;
+      font-size: 0.85rem;
+      min-width: 60px;
+      min-height: 36px;
+    }
+  }
