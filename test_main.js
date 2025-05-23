@@ -235,7 +235,7 @@ const pages = {
                 
                 <div>
                     <p style="margin-bottom: 1rem; font-size: 1.1rem; font-weight: bold;">Select Difficulty:</p>
-                    <div class="difficulty-container">
+                    <div class="difficulty-container" style="display: flex; gap: 0.5rem; justify-content: center; margin: 0 auto;">>
                         <button id="easyBtn" class="difficulty-btn active">Easy</button>
                         <button id="mediumBtn" class="difficulty-btn">Medium</button>
                         <button id="hardBtn" class="difficulty-btn">Hard</button>
