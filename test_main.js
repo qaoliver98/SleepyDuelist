@@ -55,6 +55,53 @@ function showGameOver() {
         totalQuestions: questionCount - 1,
         difficulty: currentDifficulty
     };
+    
+    // Add event listeners for game over buttons after showing overlay
+    setTimeout(() => {
+        const playAgainButton = document.getElementById('playAgainButton');
+        const shareScoreButton = document.getElementById('shareScoreButton');
+        
+        if (playAgainButton) {
+            handleMobileButtonClick(playAgainButton, () => {
+                document.getElementById('gameOverOverlay').classList.remove('show');
+                navigateTo('home');
+            });
+        }
+        
+        if (shareScoreButton) {
+            handleMobileButtonClick(shareScoreButton, () => {
+                const shareableText = generateShareableScore();
+                
+                // Copy to clipboard
+                navigator.clipboard.writeText(shareableText)
+                    .then(() => {
+                        showCopyNotification();
+                    })
+                    .catch(err => {
+                        console.error('Could not copy text: ', err);
+                        
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = shareableText;
+                        textArea.style.position = 'fixed';
+                        textArea.style.left = '-999999px';
+                        textArea.style.top = '-999999px';
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        
+                        try {
+                            document.execCommand('copy');
+                            showCopyNotification();
+                        } catch (err) {
+                            alert('Failed to copy to clipboard. Please try again.');
+                        }
+                        
+                        document.body.removeChild(textArea);
+                    });
+            });
+        }
+    }, 100);
 }
 
 // Function to get a random card from a list
