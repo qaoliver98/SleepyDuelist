@@ -1,5 +1,5 @@
-
-        /* ==========================================
+       
+       /* ==========================================
         Core Elements & Global Styles
         ========================================== */
         
@@ -60,30 +60,125 @@
             background-color: var(--medium-purple);
             color: white;
             padding: 1.5rem 0;
-            text-align: center;
             box-shadow: 0 4px 8px var(--purple-shadow);
         }
 
-        .header-buttons {
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .header-btn {
+        /* Title with decorative images */
+        .title-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .header-image {
+            width: 50px;  /* Changed from 40px */
+            height: 50px; /* Changed from 40px */
+            color: var(--light-pink);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .header-image:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .title-section h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Enhanced Navigation Menu */
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .nav-btn {
             background-color: var(--light-pink);
             color: var(--dark-purple);
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
-            box-shadow: 0 2px 4px var(--pink-shadow);
-            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 3px 6px var(--pink-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .header-btn:hover {
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover {
             background-color: var(--darker-pink);
-            transform: translateY(-2px);
-            box-shadow: 0 3px 6px var(--pink-shadow-medium);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 12px var(--pink-shadow-medium);
+        }
+
+        /* Dark theme adjustments for new elements */
+        body.dark-theme .header-image {
+            color: var(--soft-gold);
+        }
+
+        body.dark-theme .nav-btn {
+            background-color: var(--light-purple);
+            color: var(--darker-purple);
+            box-shadow: 0 3px 6px rgba(216, 181, 255, 0.3);
+        }
+
+        body.dark-theme .nav-btn:hover {
+            background-color: #c6a0fc;
+        }
+
+        .nav-btn.menu-btn-header {
+            background-color: var(--soft-gold);
+            color: var(--dark-purple);
+            display: none; /* Hidden by default, shown during game */
+        }
+        
+        .nav-btn.menu-btn-header:hover {
+            background-color: var(--dark-gold);
+            color: white;
+        }
+        
+        /* Dark theme for menu button */
+        body.dark-theme .nav-btn.menu-btn-header {
+            background-color: var(--soft-gold);
+            color: var(--dark-purple);
+        }
+        
+        body.dark-theme .nav-btn.menu-btn-header:hover {
+            background-color: var(--dark-gold);
+            color: white;
         }
 
         /* ==========================================
@@ -124,12 +219,14 @@
 
         /* Difficulty Buttons */
         .difficulty-container {
-            display: flex;
+            gap: 6px; /* Reduced from 8px */
+            margin: 1.2rem 0; /* Reduced from 1.5rem */
             justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
+            display: flex;
             flex-wrap: wrap;
-        }
+            align-items: center;
+            width: 100%;
+          }
 
         .difficulty-btn {
             background-color: var(--light-pink);
@@ -238,7 +335,7 @@
         ========================================== */
         .score-display {
             position: fixed;
-            top: 80px;
+            top: 190px; /* Moved down from 80px to avoid header */
             left: 50%;
             transform: translateX(-50%);
             background-color: var(--soft-gold);
@@ -280,18 +377,7 @@
         }
 
         .menu-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: var(--medium-purple);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            font-weight: bold;
-            box-shadow: 0 2px 6px var(--purple-shadow-medium);
-            cursor: pointer;
-            border: none;
-            transition: background-color 0.3s;
+            display: none; /* Hide the old positioned menu button */
         }
 
         .menu-btn:hover {
@@ -574,9 +660,13 @@
             }
             
             .score-display {
-                top: 130px;
-                font-size: 1.2rem;
-                padding: 0.6rem 1.5rem;
+                position: static;
+                transform: none;
+                padding: 0.5rem 1.2rem;
+                margin: 10px auto 5px;
+                width: 90%;
+                max-width: 300px;
+                top: auto; /* Reset top for mobile */
             }
             
             /* Home page elements */
@@ -629,11 +719,7 @@
             }
             
             .menu-btn {
-                position: static;
-                display: block;
-                margin: 5px auto;
-                width: 90%;
-                max-width: 300px;
+                display: none;
             }
             
             .game-content {
@@ -702,6 +788,28 @@
                 gap: 10px;
                 width: 100%;
                 margin-bottom: 15px;
+            }
+
+            .header-container {
+                padding: 0 15px;
+            }
+            
+            .title-section h1 {
+                font-size: 2rem;
+            }
+            
+            .header-image {
+                width: 45px; /* Changed from 35px */
+                height: 45px; /* Changed from 35px */
+            }
+            
+            .nav-menu {
+                gap: 0.8rem;
+            }
+            
+            .nav-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
             }
         }
 
@@ -803,6 +911,51 @@
                 font-size: 0.75rem;
                 padding: 0 10px;
                 display: block;
+            }
+
+            .title-section {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .title-section h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header-image {
+                width: 40px; /* Changed from 30px */
+                height: 40px; /* Changed from 30px */
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+                width: 100%;
+            }
+            
+            .nav-btn {
+                width: 80%;
+                max-width: 200px;
+                text-align: center;
+                padding: 0.8rem 1rem;
+            }
+
+            .score-display {
+                font-size: 1.2rem;
+                padding: 0.6rem 1.5rem;
+                margin: 5px auto;
+            }
+            
+            /* Ensure the nav menu has proper spacing */
+            .nav-menu {
+                margin-top: 0.8rem;
+            }
+            
+            /* When menu button is visible, adjust spacing */
+            .nav-btn.menu-btn-header {
+                order: -1; /* Put menu button first */
+                margin-bottom: 0.5rem;
             }
         }
 

@@ -28,6 +28,7 @@
 
     
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile_optimized.css">
 
 
     <title>Real or Fake: Yu-Gi-Oh!</title>
@@ -38,17 +39,26 @@
 </head>
 <body>
     <header>
-        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%;">
-            <div class="header-buttons">
-                <a href="about.html" class="header-btn">About</a>
-                <a href="generator.html" class="header-btn">Card Generator</a>
-                <a href="thankyou.html" class="header-btn">Thank You</a>
+        <div class="header-container">
+            <div class="title-section">
+                <!-- Left decorative image -->
+                <img src="https://i.imgur.com/a1haBnG.png" alt="Left decoration" class="header-image">
+                
+                <h1>Sleepy Duelist</h1>
+                
+                <!-- Right decorative image -->
+                <img src="https://i.imgur.com/u8XiXtS.png" alt="Right decoration" class="header-image">
             </div>
-            <h1>Sleepy Duelist</h1>
-            <div style="width: 200px;"><!-- Empty div for balance --></div>
+            
+            <nav class="nav-menu">
+                <button class="nav-btn menu-btn-header" id="headerMenuBtn">🏠 Menu</button>
+                <a href="about.html" class="nav-btn">📖 About</a>
+                <a href="generator.html" class="nav-btn">🎴 Card Generator</a>
+                
+            </nav>
         </div>
     </header>
-    
+
     <main id="pageContent">
         <!-- Home page content will be loaded here -->
     </main>

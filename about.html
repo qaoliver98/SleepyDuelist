@@ -28,190 +28,342 @@
 
     <title>The Sleepy Duelist</title>
     <style>
-        /* CSS Styles - Dark Magician Girl Theme */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-        
-        body {
-            background-color: #f2e6ff; /* Light lavender background */
-            color: #333;
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        
-        header {
-            background-color: #9370db; /* Medium purple */
-            color: white;
-            padding: 1.5rem 0;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(147, 112, 219, 0.3);
-        }
+   
+   /* ==========================================
+   About Page Styles - Based on test_styles.css
+   ========================================== */
 
-        /* Header buttons styles */
-        .header-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .header-btn {
-            background-color: #ffb7c5; /* Light pink */
-            color: #5a3b76; /* Dark purple */
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(255, 183, 197, 0.3);
-            transition: background-color 0.3s, transform 0.2s;
-        }
-        
-        .header-btn:hover {
-            background-color: #ff9eb5; /* Slightly darker pink */
-            transform: translateY(-2px);
-            box-shadow: 0 3px 6px rgba(255, 183, 197, 0.5);
-        }
-        
-        /* Dark theme for header buttons */
-        body.dark-theme .header-btn {
-            background-color: #d8b5ff; /* Light purple */
-            color: #3a2158; /* Dark purple */
-            box-shadow: 0 2px 4px rgba(216, 181, 255, 0.3);
-        }
-        
-        body.dark-theme .header-btn:hover {
-            background-color: #c6a0fc; /* Slightly darker light purple */
-        }
-        
-        main {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-        }
-        
-        .content-container {
-            max-width: 1200px;
-            width: 100%;
-            padding: 2rem;
-        }
-        
-        .page-title {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: #ff85a2; /* Soft pink */
-            text-align: center;
-        }
-        
-        footer {
-            background-color: #9370db; /* Medium purple */
-            color: white;
-            text-align: center;
-            padding: 1.5rem 0;
-            margin-top: auto;
-            box-shadow: 0 -4px 8px rgba(147, 112, 219, 0.3);
-        }
-        
-        /* Dark theme - Now Dark Magician Girl night theme */
-        body.dark-theme {
-            background-color: #2e1c45; /* Dark purple background */
-            color: #e6f2ff; /* Light blue text */
-        }
-        
-        body.dark-theme .page-title {
-            color: #ffb7c5; /* Light pink */
-        }
-        
-        /* Theme toggle */
-        .theme-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #9370db; /* Medium purple */
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(147, 112, 219, 0.6);
-            transition: background-color 0.3s;
-            z-index: 100;
-        }
-        
-        .theme-toggle:hover {
-            background-color: #8465be; /* Slightly darker purple */
-        }
-        
-        /* Common button style */
-        .primary-btn {
-            display: inline-block;
-            background-color: #9370db; /* Medium purple */
-            color: white;
-            padding: 0.8rem 1.5rem;
-            font-size: 1.2rem;
-            text-decoration: none;
-            border-radius: 0.5rem;
-            font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 4px 8px rgba(147, 112, 219, 0.4);
-            border: none;
-            cursor: pointer;
-            margin: 0.5rem;
-        }
-        
-        .primary-btn:hover {
-            background-color: #8465be; /* Slightly darker purple */
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(147, 112, 219, 0.6);
-        }
-        
-        /* Card-like component */
-        .card {
-            background-color: #e6f2ff; /* Light blue */
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 12px rgba(147, 112, 219, 0.25);
-            margin-bottom: 2rem;
-            border: 2px solid #d8b5ff; /* Light purple border */
-        }
-        
-        body.dark-theme .card {
-            background-color: #3a2158; /* Slightly lighter purple */
-            color: #e6f2ff; /* Light blue text */
-            border-color: #9370db; /* Medium purple border */
-        }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .page-title {
-                font-size: 2rem;
-            }
-            
-            .content-container {
-                padding: 1rem;
-            }
-        }
+/* Import all the core styles from test_styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+:root {
+    /* Color Variables */
+    --light-lavender: #f2e6ff;
+    --medium-purple: #9370db;
+    --light-purple: #d8b5ff;
+    --dark-purple: #5a3b76;
+    --deep-purple: #2e1c45;
+    --darker-purple: #3a2158;
+    --deeper-purple: #43275a;
+    --soft-pink: #ff85a2;
+    --light-pink: #ffb7c5;
+    --darker-pink: #ff9eb5;
+    --dark-pink: #993344;
+    --light-blue: #e6f2ff;
+    --soft-gold: #ffcc99;
+    --light-gold: #ffebcc;
+    --dark-gold: #996633;
+    --pastel-green: #9ee2a2;
+    --dark-green: #2e6934;
+    
+    /* Shadows */
+    --purple-shadow: rgba(147, 112, 219, 0.3);
+    --purple-shadow-medium: rgba(147, 112, 219, 0.4);
+    --purple-shadow-strong: rgba(147, 112, 219, 0.6);
+    --pink-shadow: rgba(255, 183, 197, 0.3);
+    --pink-shadow-medium: rgba(255, 183, 197, 0.4);
+    --pink-shadow-strong: rgba(255, 183, 197, 0.6);
+    --gold-shadow: rgba(255, 204, 153, 0.4);
+    --gold-shadow-strong: rgba(255, 204, 153, 0.5);
+}
+
+body {
+    background-color: var(--light-lavender);
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ==========================================
+   Header Styles (matching test.html)
+   ========================================== */
+header {
+    background-color: var(--medium-purple);
+    color: white;
+    padding: 1.5rem 0;
+    box-shadow: 0 4px 8px var(--purple-shadow);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin: 0;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.header-btn {
+    background-color: var(--light-pink);
+    color: var(--dark-purple);
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 3px 6px var(--pink-shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.header-btn:hover::before {
+    left: 100%;
+}
+
+.header-btn:hover {
+    background-color: var(--darker-pink);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 12px var(--pink-shadow-medium);
+}
+
+/* ==========================================
+   Main Content Styles
+   ========================================== */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+}
+
+.content-container {
+    max-width: 800px;
+    width: 100%;
+}
+
+.page-title {
+    font-size: 3rem;
+    color: var(--soft-pink);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    background-color: var(--light-blue);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px var(--purple-shadow);
+    border: 2px solid var(--light-purple);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px var(--purple-shadow-medium);
+    border-color: var(--medium-purple);
+}
+
+.card h3 {
+    color: var(--medium-purple);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.card p {
+    color: var(--dark-purple);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* ==========================================
+   Footer Styles
+   ========================================== */
+footer {
+    background-color: var(--medium-purple);
+    color: white;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: auto;
+    box-shadow: 0 -4px 8px var(--purple-shadow);
+}
+
+footer small {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* ==========================================
+   Theme Toggle
+   ========================================== */
+.theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--medium-purple);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 10px var(--purple-shadow-strong);
+    transition: background-color 0.3s;
+    z-index: 100;
+}
+
+.theme-toggle:hover {
+    background-color: #8465be;
+}
+
+/* ==========================================
+   Dark Theme Styles
+   ========================================== */
+body.dark-theme {
+    background-color: var(--deep-purple);
+    color: var(--light-blue);
+}
+
+body.dark-theme .page-title {
+    color: var(--light-pink);
+}
+
+body.dark-theme .card {
+    background-color: var(--darker-purple);
+    color: var(--light-blue);
+    border-color: var(--medium-purple);
+}
+
+body.dark-theme .card h3 {
+    color: var(--light-purple);
+}
+
+body.dark-theme .card p {
+    color: var(--light-blue);
+}
+
+body.dark-theme .header-btn {
+    background-color: var(--light-purple);
+    color: var(--darker-purple);
+    box-shadow: 0 2px 4px rgba(216, 181, 255, 0.3);
+}
+
+body.dark-theme .header-btn:hover {
+    background-color: #c6a0fc;
+}
+
+/* ==========================================
+   Responsive Styles
+   ========================================== */
+@media (max-width: 768px) {
+    header div {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .header-buttons {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .header-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .card h3 {
+        font-size: 1.5rem;
+    }
+
+    .card p {
+        font-size: 1rem;
+    }
+
+    .theme-toggle {
+        bottom: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .header-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+
+    .card h3 {
+        font-size: 1.3rem;
+    }
+
+    footer small {
+        font-size: 0.8rem;
+        padding: 0 10px;
+    }
+}
     </style>
 </head>
 <body>
     <header>
-        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%;">
-            <div class="header-buttons">
-                <a href="index.html" class="header-btn">Home</a>
-                <a href="generator.html" class="header-btn">Card Generator</a>
-                <a href="thankyou.html" class="header-btn">Thank You</a>
-            </div>
-            <h1>ABOUT</h1>
-            <div style="width: 200px;"><!-- Empty div for balance --></div>
+    <div class="header-container" style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%;">
+        <div class="header-buttons">
+            <a href="index.html" class="header-btn">🏠 Home</a>
+            <a href="generator.html" class="header-btn">🎴 Card Generator</a>
         </div>
-    </header>
+        <h1>ABOUT</h1>
+        <div style="width: 200px;"><!-- Empty div for balance --></div>
+    </div>
+</header>
+
+
+
     
     <main>
         <div class="content-container">
@@ -224,13 +376,21 @@
             </div>
             
             <div class="card">
+                <h3>What's New?</h3>
+                <p>Completely overhauled the overall look of the site, pruned more bad data, and overhauled the UI for mobile devices.</p>
+            </div>
+
+            <div class="card">
                 <h3>How to use the Generator</h3>
                 <p>Just click the button to use sample data, then start generating. It will generate up to 1000 results.</p>
             </div>
 
             <div class="card">
-                <h3>Blah blah blah</h3>
-                <p>Place holder text c:</p>
+                <h3>Thank You!</h3>
+                <p>This would not have been possible without my many friends, those who helped me in the MOONCORD, the assistance of AI for helping with the code/CSS, <a href="https://www.kaggle.com/datasets/hammadus/yugioh-full-card-database-index-august-1st-2025" style="color: #007acc; text-decoration: none;">Kaggle.com</a>
+                    for providing the plaintext of Yu-Gi-Oh! card names, and to YOU for playing!</p>
+                <br>
+                <p>Thank you everyone!</p>
             </div>
         </div>
     </main>
