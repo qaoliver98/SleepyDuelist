@@ -23,44 +23,46 @@
 }
 
 /* ==========================================
-   COMPACT HEADER FOR MOBILE
+   COMPACT HEADER FOR MOBILE - REDUCED SIZE
    ========================================== */
 @media screen and (max-width: 768px) {
   header {
-    padding: 0.8rem 0 0.5rem 0;
+    padding: 0.5rem 0 0.3rem 0; /* Reduced from 0.8rem/0.5rem */
     position: sticky;
     top: 0;
     z-index: 200;
   }
   
   .header-container {
-    padding: 0 10px;
-    gap: 0.5rem;
+    padding: 0 8px; /* Reduced from 10px */
+    gap: 0.3rem; /* Reduced from 0.5rem */
   }
   
   .title-section {
-    gap: 0.8rem;
+    gap: 0.6rem; /* Reduced from 0.8rem */
   }
   
   .title-section h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem; /* Reduced from 1.8rem */
     margin: 0;
   }
   
   .header-image {
-    width: 35px;
-    height: 35px;
+    width: 30px; /* Reduced from 35px */
+    height: 30px; /* Reduced from 35px */
   }
   
   .nav-menu {
-    gap: 0.5rem;
-    margin-top: 0.3rem;
+    gap: 0.3rem; /* Reduced from 0.5rem */
+    margin-top: 0.2rem; /* Reduced from 0.3rem */
+    flex-wrap: wrap; /* Allow wrapping on very small screens */
   }
   
   .nav-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-    border-radius: 20px;
+    padding: 0.4rem 0.8rem; /* Reduced from 0.5rem/1rem */
+    font-size: 0.8rem; /* Reduced from 0.85rem */
+    border-radius: 16px; /* Reduced from 20px */
+    min-height: 36px; /* Reduced minimum height */
   }
 }
 
@@ -74,9 +76,9 @@
     top: auto !important;
     left: auto !important;
     transform: none !important;
-    margin: 5px auto 8px auto;
-    padding: 0.6rem 1.5rem;
-    font-size: 1.3rem;
+    margin: 3px auto 6px auto; /* Reduced margins */
+    padding: 0.5rem 1.2rem; /* Reduced padding */
+    font-size: 1.2rem; /* Reduced from 1.3rem */
     width: fit-content;
     max-width: 90%;
   }
@@ -85,20 +87,20 @@
     position: relative !important;
     top: auto !important;
     right: auto !important;
-    margin: 0 auto 8px auto;
-    padding: 0.4rem 1rem;
+    margin: 0 auto 6px auto; /* Reduced margin */
+    padding: 0.3rem 0.8rem; /* Reduced padding */
     width: fit-content;
-    font-size: 0.9rem;
+    font-size: 0.85rem; /* Reduced from 0.9rem */
   }
   
   /* Compact lives display */
   .lives-container {
-    margin: 5px 0 10px 0;
-    gap: 0.5rem;
+    margin: 3px 0 8px 0; /* Reduced margins */
+    gap: 0.4rem; /* Reduced gap */
   }
   
   .life {
-    font-size: 1.5rem;
+    font-size: 1.4rem; /* Reduced from 1.5rem */
   }
 }
 
@@ -113,19 +115,19 @@
   }
   
   .selection-container {
-    gap: 8px;
-    margin-bottom: 15px;
-    padding: 0 10px;
+    gap: 6px; /* Reduced from 8px */
+    margin-bottom: 12px; /* Reduced from 15px */
+    padding: 0 8px; /* Reduced from 10px */
     width: 100%;
     box-sizing: border-box;
   }
   
   /* Compact selection boxes */
   .selection-box {
-    padding: 12px 8px !important;
+    padding: 10px 6px !important; /* Reduced padding */
     margin-bottom: 0 !important;
-    border-radius: 8px;
-    min-height: 50px;
+    border-radius: 6px; /* Reduced from 8px */
+    min-height: 44px; /* Reduced from 50px */
     max-width: 100%;
     width: 100%;
     display: flex;
@@ -139,13 +141,13 @@
   }
   
   .selection-box p {
-    font-size: 1.1rem !important;
+    font-size: 1rem !important; /* Reduced from 1.1rem */
     margin: 0 !important;
-    line-height: 1.3;
+    line-height: 1.2; /* Reduced from 1.3 */
     text-align: center;
     word-wrap: break-word;
     hyphens: auto;
-    padding: 0 5px;
+    padding: 0 4px; /* Reduced from 5px */
   }
   
   /* Touch-friendly selection boxes */
@@ -168,38 +170,38 @@
 @media screen and (max-width: 768px) {
   /* For 2 options (Easy mode) - larger boxes */
   .selection-container:has(.selection-box:nth-child(2):last-child) .selection-box {
-    padding: 16px 12px;
-    min-height: 60px;
+    padding: 14px 10px; /* Reduced from 16px/12px */
+    min-height: 52px; /* Reduced from 60px */
   }
   
   .selection-container:has(.selection-box:nth-child(2):last-child) .selection-box p {
-    font-size: 1.3rem !important;
+    font-size: 1.2rem !important; /* Reduced from 1.3rem */
   }
   
   /* For 3 options (Medium mode) */
   .selection-container:has(.selection-box:nth-child(3):last-child) .selection-box {
-    padding: 14px 10px;
-    min-height: 55px;
+    padding: 12px 8px; /* Reduced from 14px/10px */
+    min-height: 48px; /* Reduced from 55px */
   }
   
   .selection-container:has(.selection-box:nth-child(3):last-child) .selection-box p {
-    font-size: 1.2rem !important;
+    font-size: 1.1rem !important; /* Reduced from 1.2rem */
   }
   
   /* For 5 options (Hard mode) - ultra-compact */
   .selection-container:has(.selection-box:nth-child(5)) .selection-box {
-    padding: 8px 6px !important;
-    min-height: 44px !important;
-    margin-bottom: 6px !important;
+    padding: 6px 4px !important; /* Reduced from 8px/6px */
+    min-height: 40px !important; /* Reduced from 44px */
+    margin-bottom: 4px !important; /* Reduced from 6px */
   }
   
   .selection-container:has(.selection-box:nth-child(5)) .selection-box p {
-    font-size: 0.95rem !important;
-    line-height: 1.2;
+    font-size: 0.9rem !important; /* Reduced from 0.95rem */
+    line-height: 1.1; /* Reduced from 1.2 */
   }
   
   .selection-container:has(.selection-box:nth-child(5)) {
-    gap: 6px;
+    gap: 4px; /* Reduced from 6px */
   }
 }
 
@@ -208,41 +210,41 @@
    ========================================== */
 @media screen and (max-width: 768px) {
   .home-container {
-    padding: 0 15px;
+    padding: 0 12px; /* Reduced from 15px */
     max-width: 100%;
   }
   
   .home-title {
-    font-size: 2.2rem;
-    margin-bottom: 1.5rem;
+    font-size: 2rem; /* Reduced from 2.2rem */
+    margin-bottom: 1.2rem; /* Reduced from 1.5rem */
   }
   
   .last-score {
-    margin: 1rem 0;
-    padding: 0.8rem;
-    font-size: 1.1rem;
-    border-radius: 8px;
+    margin: 0.8rem 0; /* Reduced from 1rem */
+    padding: 0.7rem; /* Reduced from 0.8rem */
+    font-size: 1rem; /* Reduced from 1.1rem */
+    border-radius: 6px; /* Reduced from 8px */
   }
   
   /* Compact difficulty selection */
   .difficulty-container {
-    gap: 8px;
-    margin: 1.5rem 0;
+    gap: 6px; /* Reduced from 8px */
+    margin: 1.2rem 0; /* Reduced from 1.5rem */
     justify-content: center;
   }
   
   .difficulty-btn {
-    padding: 0.7rem 1.2rem;
-    font-size: 1rem;
-    min-width: 80px;
-    min-height: 44px; /* Touch-friendly */
+    padding: 0.6rem 1rem; /* Reduced from 0.7rem/1.2rem */
+    font-size: 0.9rem; /* Reduced from 1rem */
+    min-width: 70px; /* Reduced from 80px */
+    min-height: 40px; /* Reduced from 44px */
   }
   
   .begin-btn {
-    padding: 1rem 2.5rem;
-    font-size: 1.2rem;
-    margin-top: 1.5rem;
-    min-height: 50px;
+    padding: 0.8rem 2rem; /* Reduced from 1rem/2.5rem */
+    font-size: 1.1rem; /* Reduced from 1.2rem */
+    margin-top: 1.2rem; /* Reduced from 1.5rem */
+    min-height: 44px; /* Reduced from 50px */
   }
 }
 
@@ -251,7 +253,7 @@
    ========================================== */
 @media screen and (max-width: 768px) {
   main {
-    padding: 0.5rem 0;
+    padding: 0.3rem 0; /* Reduced from 0.5rem */
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -262,7 +264,7 @@
   
   /* Ensure content stays within viewport */
   .game-content {
-    max-height: calc(100vh - 180px); /* Account for header/footer */
+    max-height: calc(100vh - 160px); /* Reduced from 180px to account for smaller header */
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -275,38 +277,52 @@
   .game-over-overlay {
     height: 100vh !important;
     height: calc(var(--mobile-vh, 1vh) * 100) !important;
-    padding: 20px;
+    padding: 15px; /* Reduced from 20px */
     box-sizing: border-box;
+    /* Ensure overlay is above everything else */
+    z-index: 9999 !important;
+    pointer-events: all !important;
   }
   
   .game-over-content {
     width: 100%;
-    max-width: 350px;
-    padding: 2rem 1.5rem;
-    border-radius: 12px;
-    max-height: 80vh;
+    max-width: 320px; /* Reduced from 350px */
+    padding: 1.5rem 1.2rem; /* Reduced padding */
+    border-radius: 10px; /* Reduced from 12px */
+    max-height: 75vh; /* Reduced from 80vh */
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    /* Ensure content is interactive */
+    pointer-events: all !important;
+    position: relative;
+    z-index: 10000;
   }
   
   .game-over-content h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: 1.8rem; /* Reduced from 2rem */
+    margin-bottom: 0.8rem; /* Reduced from 1rem */
   }
   
   .game-over-content p {
-    font-size: 1.3rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.2rem; /* Reduced from 1.3rem */
+    margin-bottom: 1.2rem; /* Reduced from 1.5rem */
   }
   
   .play-again-btn,
   .share-score-btn {
     display: block;
     width: 100%;
-    margin: 8px 0;
-    padding: 0.9rem;
-    font-size: 1.1rem;
-    min-height: 50px;
+    margin: 6px 0; /* Reduced from 8px */
+    padding: 0.8rem; /* Reduced from 0.9rem */
+    font-size: 1rem; /* Reduced from 1.1rem */
+    min-height: 44px; /* Reduced from 50px */
+    /* Ensure buttons are clickable */
+    pointer-events: all !important;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    position: relative;
+    z-index: 10001;
   }
 }
 
@@ -316,28 +332,28 @@
 @media screen and (max-width: 768px) {
   .notification {
     position: fixed !important;
-    top: 20px !important;
-    left: 10px !important;
-    right: 10px !important;
+    top: 15px !important; /* Reduced from 20px */
+    left: 8px !important; /* Reduced from 10px */
+    right: 8px !important; /* Reduced from 10px */
     transform: none !important;
     width: auto !important;
     max-width: none !important;
-    padding: 12px 15px;
-    font-size: 1rem;
-    border-radius: 8px;
+    padding: 10px 12px; /* Reduced padding */
+    font-size: 0.9rem; /* Reduced from 1rem */
+    border-radius: 6px; /* Reduced from 8px */
     z-index: 1500;
   }
   
   .copy-notification {
     position: fixed !important;
     top: 50% !important;
-    left: 10px !important;
-    right: 10px !important;
+    left: 8px !important; /* Reduced from 10px */
+    right: 8px !important; /* Reduced from 10px */
     transform: translateY(-50%) !important;
     width: auto !important;
     max-width: none !important;
-    padding: 15px;
-    font-size: 1.1rem;
+    padding: 12px; /* Reduced from 15px */
+    font-size: 1rem; /* Reduced from 1.1rem */
     text-align: center;
   }
 }
@@ -347,11 +363,11 @@
    ========================================== */
 @media screen and (max-width: 768px) {
   .theme-toggle {
-    bottom: 15px;
-    right: 15px;
-    width: 48px;
-    height: 48px;
-    font-size: 1.3rem;
+    bottom: 12px; /* Reduced from 15px */
+    right: 12px; /* Reduced from 15px */
+    width: 44px; /* Reduced from 48px */
+    height: 44px; /* Reduced from 48px */
+    font-size: 1.2rem; /* Reduced from 1.3rem */
     z-index: 150;
   }
 }
@@ -361,14 +377,14 @@
    ========================================== */
 @media screen and (max-width: 768px) {
   footer {
-    padding: 1rem 0;
+    padding: 0.8rem 0; /* Reduced from 1rem */
     margin-top: 0;
   }
   
   footer small {
-    font-size: 0.8rem;
-    padding: 0 15px;
-    line-height: 1.4;
+    font-size: 0.75rem; /* Reduced from 0.8rem */
+    padding: 0 12px; /* Reduced from 15px */
+    line-height: 1.3; /* Reduced from 1.4 */
   }
 }
 
@@ -377,49 +393,51 @@
    ========================================== */
 @media screen and (max-width: 480px) {
   .title-section h1 {
-    font-size: 1.6rem;
+    font-size: 1.4rem; /* Reduced from 1.6rem */
   }
   
   .header-image {
-    width: 30px;
-    height: 30px;
+    width: 26px; /* Reduced from 30px */
+    height: 26px; /* Reduced from 30px */
   }
   
   .nav-btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
+    padding: 0.35rem 0.7rem; /* Further reduced */
+    font-size: 0.75rem; /* Reduced from 0.8rem */
+    min-height: 32px; /* Further reduced */
   }
   
   .home-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem; /* Reduced from 1.8rem */
   }
   
   .difficulty-btn {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
-    min-width: 70px;
+    padding: 0.5rem 0.8rem; /* Reduced from 0.6rem/1rem */
+    font-size: 0.85rem; /* Reduced from 0.9rem */
+    min-width: 60px; /* Reduced from 70px */
+    min-height: 36px; /* Reduced from 40px */
   }
   
   .selection-box p {
-    font-size: 1rem !important;
+    font-size: 0.9rem !important; /* Reduced from 1rem */
   }
   
   /* For 5 options on very small screens */
   .selection-container:has(.selection-box:nth-child(5)) .selection-box p {
-    font-size: 0.85rem !important;
+    font-size: 0.8rem !important; /* Reduced from 0.85rem */
   }
   
   .score-display {
-    font-size: 1.1rem;
-    padding: 0.5rem 1.2rem;
+    font-size: 1rem; /* Reduced from 1.1rem */
+    padding: 0.4rem 1rem; /* Reduced from 0.5rem/1.2rem */
   }
   
   .game-over-content h2 {
-    font-size: 1.6rem;
+    font-size: 1.4rem; /* Reduced from 1.6rem */
   }
   
   .game-over-content p {
-    font-size: 1.1rem;
+    font-size: 1rem; /* Reduced from 1.1rem */
   }
 }
 
@@ -428,28 +446,28 @@
    ========================================== */
 @media screen and (max-width: 768px) and (orientation: landscape) {
   .game-over-overlay {
-    padding: 10px;
+    padding: 8px; /* Reduced from 10px */
   }
   
   .game-over-content {
     max-height: 90vh;
-    padding: 1.5rem 1rem;
+    padding: 1.2rem 0.8rem; /* Reduced from 1.5rem/1rem */
   }
   
   .game-over-content h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.3rem; /* Reduced from 1.5rem */
+    margin-bottom: 0.4rem; /* Reduced from 0.5rem */
   }
   
   .game-over-content p {
-    font-size: 1rem;
-    margin-bottom: 1rem;
+    font-size: 0.9rem; /* Reduced from 1rem */
+    margin-bottom: 0.8rem; /* Reduced from 1rem */
   }
   
   .play-again-btn,
   .share-score-btn {
-    padding: 0.7rem;
-    font-size: 1rem;
+    padding: 0.6rem; /* Reduced from 0.7rem */
+    font-size: 0.9rem; /* Reduced from 1rem */
   }
 }
 
@@ -469,6 +487,8 @@
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
+    /* Ensure buttons are clickable */
+    pointer-events: all !important;
   }
   
   /* Enhanced touch feedback */
@@ -498,13 +518,13 @@
    ACCESSIBILITY IMPROVEMENTS
    ========================================== */
 @media screen and (max-width: 768px) {
-  /* Ensure minimum touch target sizes */
+  /* Ensure minimum touch target sizes (reduced for space efficiency) */
   .selection-box,
   .difficulty-btn,
   .nav-btn,
   button {
-    min-height: 44px;
-    min-width: 44px;
+    min-height: 40px; /* Reduced from 44px but still accessible */
+    min-width: 40px; /* Reduced from 44px */
   }
   
   /* Better focus indicators for keyboard navigation */
@@ -512,8 +532,8 @@
   .difficulty-btn:focus,
   .begin-btn:focus,
   .nav-btn:focus {
-    outline: 3px solid var(--medium-purple);
-    outline-offset: 2px;
+    outline: 2px solid var(--medium-purple); /* Reduced from 3px */
+    outline-offset: 1px; /* Reduced from 2px */
   }
   
   /* High contrast mode support */
