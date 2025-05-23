@@ -6,7 +6,6 @@ let currentDifficulty = 'easy'; // Default difficulty
 let lastScore = null; // Track the last score
 let isProcessing = false; // Global variable to track processing state
 
-
 // Function to show/hide the header menu button
 function toggleHeaderMenuButton(show) {
     const headerMenuBtn = document.getElementById('headerMenuBtn');
@@ -20,7 +19,6 @@ function initializeHeaderMenuButton() {
     const headerMenuBtn = document.getElementById('headerMenuBtn');
     if (headerMenuBtn) {
         headerMenuBtn.addEventListener('click', function() {
-            // Same functionality as the old menu button
             showNotification('Returning to menu...', 'success');
             setTimeout(() => {
                 location.reload();
@@ -210,7 +208,7 @@ const pages = {
     selection: createSelectionPage
 };
 
-/// Enhanced function to set mobile viewport height with iOS fixes
+// Enhanced function to set mobile viewport height with iOS fixes
 function setMobileViewportHeight() {
     // First we get the viewport height and multiply it by 1% to get a value for a vh unit
     let vh = window.innerHeight * 0.01;
@@ -229,55 +227,8 @@ function setMobileViewportHeight() {
         if (mainContent) {
             mainContent.style.minHeight = 'calc(var(--vh, 1vh) * 100 - env(safe-area-inset-top) - env(safe-area-inset-bottom))';
         }
-        
-        // Fix for iOS selection page sizing
-        const selectionContainer = document.querySelector('.selection-container');
-        if (selectionContainer) {
-            // Ensure container takes appropriate space
-            selectionContainer.style.minHeight = 'calc(var(--vh, 1vh) * 70)';
-            selectionContainer.style.maxHeight = 'calc(var(--vh, 1vh) * 80)';
-            selectionContainer.style.overflow = 'auto';
-            selectionContainer.style.webkitOverflowScrolling = 'touch';
-            
-            // Adjust box sizes for iOS
-            const options = document.querySelectorAll('.selection-box');
-            if (options.length > 0) {
-                // Different sizing based on number of options
-                if (options.length > 3) {
-                    // For many options, make them more compact
-                    options.forEach(option => {
-                        option.style.margin = '8px 0';
-                        option.style.padding = '12px 10px';
-                        option.style.minHeight = '50px';
-                    });
-                } else {
-                    // For fewer options, give them more room
-                    options.forEach(option => {
-                        option.style.margin = '12px 0';
-                        option.style.padding = '15px 12px';
-                        option.style.minHeight = '60px';
-                    });
-                }
-            }
-        }
-        
-        // Make sure notification is properly positioned on iOS
-        const notification = document.getElementById('notification');
-        if (notification) {
-            notification.style.top = 'calc(env(safe-area-inset-top) + 10px)';
-        }
-        
-        // Ensure lives container is visible and doesn't overlap
-        const livesContainer = document.querySelector('.lives-container');
-        if (livesContainer) {
-            livesContainer.style.marginTop = '15px';
-            livesContainer.style.marginBottom = '10px';
-            livesContainer.style.paddingTop = '5px';
-            livesContainer.style.paddingBottom = '5px';
-        }
     }
     
-    // Rest of the original function...
     // Check if the content fits within the viewport
     const mainContent = document.getElementById('pageContent');
     if (mainContent) {
@@ -307,69 +258,41 @@ function setMobileViewportHeight() {
     }
 }
 
-// Enhanced touch handling for iOS
-function enhanceTouchInteraction() {
-    // Get all interactive elements
-    const interactiveElements = document.querySelectorAll('button, .selection-box, .header-btn, .theme-toggle');
+// Improved mobile button click handler
+function handleMobileButtonClick(element, callback) {
+    // Remove any existing event listeners to prevent duplicates
+    const newElement = element.cloneNode(true);
+    element.parentNode.replaceChild(newElement, element);
     
-    // Special handling for iOS devices
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    
-    interactiveElements.forEach(element => {
-        // Remove any existing listeners to prevent duplicates
-        element.removeEventListener('touchstart', handleTouchStart);
-        element.removeEventListener('touchend', handleTouchEnd);
-        
-        // Add enhanced touch handlers
-        element.addEventListener('touchstart', handleTouchStart, { passive: true });
-        element.addEventListener('touchend', handleTouchEnd);
-        
-        // Additional iOS-specific handling
-        if (isIOS) {
-            // Prevent any accidental zoom or scroll when tapping
-            element.addEventListener('touchmove', function(e) {
-                e.preventDefault();
-            }, { passive: false });
-            
-            // Improve tap responsiveness on iOS
-            element.style.WebkitTapHighlightColor = 'rgba(0,0,0,0)';
-            
-            // Ensure proper button behavior
-            if (element.tagName.toLowerCase() === 'button' || element.classList.contains('selection-box')) {
-                element.style.cursor = 'pointer';
-                element.style.WebkitAppearance = 'none';
-            }
-        }
+    // Add both click and touchend for better mobile support
+    newElement.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        callback();
     });
-}
-
-// Add this call to the document ready function to ensure fixes are applied
-document.addEventListener('DOMContentLoaded', function() {
-    // ... existing code ...
     
-    // Apply iOS fixes immediately
-    fixIOSIssues();
+    newElement.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        callback();
+    });
     
-    // Also re-apply iOS fixes when navigating to new pages
-    const originalNavigateTo = navigateTo;
-    navigateTo = function(page) {
-        originalNavigateTo(page);
-        
-        // Re-apply iOS fixes after page navigation
-        setTimeout(function() {
-            fixIOSIssues();
+    // Add visual feedback
+    newElement.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        this.style.opacity = '0.7';
+        this.style.transform = 'scale(0.98)';
+    }, { passive: false });
+    
+    newElement.addEventListener('touchend', function(e) {
+        setTimeout(() => {
+            this.style.opacity = '';
+            this.style.transform = '';
         }, 100);
-    };
-    
-    // Also monitor orientation changes specifically for iOS
-    window.addEventListener('orientationchange', function() {
-        // Apply iOS fixes after orientation change with a delay
-        setTimeout(function() {
-            fixIOSIssues();
-            setMobileViewportHeight();
-        }, 300);
     });
-});
+    
+    return newElement;
+}
 
 // Function to navigate between pages
 function navigateTo(page) {
@@ -386,39 +309,41 @@ function navigateTo(page) {
     // Add event listeners after page content is loaded
     if (page === 'home') {
         // Add event listeners for difficulty buttons
-        document.getElementById('easyBtn').addEventListener('click', () => {
-            setDifficulty('easy');
-        });
+        const easyBtn = document.getElementById('easyBtn');
+        const mediumBtn = document.getElementById('mediumBtn');
+        const hardBtn = document.getElementById('hardBtn');
+        const beginBtn = document.getElementById('beginButton');
         
-        document.getElementById('mediumBtn').addEventListener('click', () => {
-            setDifficulty('medium');
-        });
-        
-        document.getElementById('hardBtn').addEventListener('click', () => {
-            setDifficulty('hard');
-        });
-        
-        document.getElementById('beginButton').addEventListener('click', () => {
-            // Reset score when starting a new game
-            score = 0;
-            questionCount = 0;
-            lives = 3;
-            navigateTo('selection');
-        });
-        
-        // Add touch event listeners for buttons on the home page
-        addTouchListeners([
-            'easyBtn', 'mediumBtn', 'hardBtn', 'beginButton'
-        ].map(id => document.getElementById(id)));
+        if (easyBtn) {
+            handleMobileButtonClick(easyBtn, () => setDifficulty('easy'));
+        }
+        if (mediumBtn) {
+            handleMobileButtonClick(mediumBtn, () => setDifficulty('medium'));
+        }
+        if (hardBtn) {
+            handleMobileButtonClick(hardBtn, () => setDifficulty('hard'));
+        }
+        if (beginBtn) {
+            handleMobileButtonClick(beginBtn, () => {
+                // Reset score when starting a new game
+                score = 0;
+                questionCount = 0;
+                lives = 3;
+                navigateTo('selection');
+            });
+        }
         
     } else if (page === 'selection') {
-        // Add click event for menu button
-        document.getElementById('menuButton').addEventListener('click', () => {
-            navigateTo('home');
-        });
-        
-        // Add touch event listener for menu button
-        addTouchListeners([document.getElementById('menuButton')]);
+        // Add click event for menu button with improved mobile handling
+        const menuButton = document.getElementById('menuButton');
+        if (menuButton) {
+            handleMobileButtonClick(menuButton, () => {
+                showNotification('Returning to menu...', 'success');
+                setTimeout(() => {
+                    navigateTo('home');
+                }, 500);
+            });
+        }
         
         // Add click events for all option boxes
         const options = document.querySelectorAll('.selection-box');
@@ -481,25 +406,35 @@ function navigateTo(page) {
             setTimeout(() => {
                 navigateTo('selection'); // Load new cards
                 isProcessing = false; // Reset processing flag for next question
-            }, 1800); // Increased from 1000ms to 2000ms
+            }, 1800);
         }
     
-        // Add click event listeners to all option boxes
+        // Add improved click event listeners to all option boxes
         options.forEach(option => {
-            option.addEventListener('click', function() {
-                handleOptionClick(this, options);
+            // Remove existing listeners and create new element to avoid conflicts
+            const newOption = option.cloneNode(true);
+            option.parentNode.replaceChild(newOption, option);
+            
+            // Add click handler
+            newOption.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                handleOptionClick(this, document.querySelectorAll('.selection-box'));
             });
             
-            // Add touch events for mobile devices
-            option.addEventListener('touchstart', function(e) {
-                this.classList.add('button-active');
-            }, { passive: true });
-            
-            option.addEventListener('touchend', function(e) {
-                e.preventDefault(); // Prevent default behavior
-                this.classList.remove('button-active');
-                handleOptionClick(this, options);
+            // Add touch handler for mobile
+            newOption.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                handleOptionClick(this, document.querySelectorAll('.selection-box'));
             });
+            
+            // Add visual feedback
+            newOption.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                this.style.transform = 'scale(0.98)';
+                this.style.opacity = '0.8';
+            }, { passive: false });
         });
     }
     
@@ -519,14 +454,8 @@ function navigateTo(page) {
             options.forEach(option => {
                 // Ensure touch targets are large enough
                 option.style.minHeight = '50px';
-                
-                // Fix any iOS-specific issues with touch events
-                option.addEventListener('touchstart', function(e) {
-                    // Prevent default only if needed to avoid conflicts
-                    if (!e.target.closest('input, textarea')) {
-                        e.preventDefault();
-                    }
-                }, { passive: false });
+                option.style.touchAction = 'manipulation';
+                option.style.webkitTapHighlightColor = 'transparent';
             });
             
             // Fix iOS momentum scrolling issues in the game content area
@@ -544,6 +473,7 @@ function navigateTo(page) {
             difficultyBtns.forEach(btn => {
                 btn.style.minWidth = '80px';
                 btn.style.minHeight = '44px';
+                btn.style.touchAction = 'manipulation';
             });
             
             // Make sure the begin button is prominent and easily tappable
@@ -551,6 +481,7 @@ function navigateTo(page) {
             if (beginBtn) {
                 beginBtn.style.minHeight = '50px';
                 beginBtn.style.minWidth = '200px';
+                beginBtn.style.touchAction = 'manipulation';
             }
         }
     }
@@ -561,89 +492,9 @@ function navigateTo(page) {
         // Use the custom vh variable for better mobile positioning
         gameOverOverlay.style.height = 'calc(var(--vh, 1vh) * 100)';
     }
-    
-    // Call enhanced touch interaction after DOM updates
-    setTimeout(enhanceTouchInteraction, 50);
 }
 
-// Function to add touch event listeners to elements
-function addTouchListeners(elements) {
-    elements.forEach(element => {
-        if (!element) return; // Skip null elements
-        
-        // Remove existing touch listeners to prevent duplicates
-        element.removeEventListener('touchstart', touchStartHandler);
-        element.removeEventListener('touchend', touchEndHandler);
-        
-        // Add touch event listeners
-        element.addEventListener('touchstart', touchStartHandler, { passive: true });
-        element.addEventListener('touchend', touchEndHandler);
-    });
-}
-
-// Touch event handlers
-function touchStartHandler(e) {
-    this.classList.add('button-active');
-}
-
-function touchEndHandler(e) {
-    e.preventDefault(); // Prevent default to avoid delay
-    this.classList.remove('button-active');
-    
-    // If this is a selection box, handle the click logic
-    if (this.classList.contains('selection-box')) {
-        const options = document.querySelectorAll('.selection-box');
-        handleOptionClick(this, options);
-    } else {
-        // For other buttons, trigger a click event
-        this.click();
-    }
-}
-
-// Enhanced touch handling for all interactive elements
-function enhanceTouchInteraction() {
-    // Get all interactive elements
-    const interactiveElements = document.querySelectorAll('button, .selection-box, .header-btn, .theme-toggle');
-    
-    interactiveElements.forEach(element => {
-        // Remove any existing listeners to prevent duplicates
-        element.removeEventListener('touchstart', handleTouchStart);
-        element.removeEventListener('touchend', handleTouchEnd);
-        
-        // Add enhanced touch handlers
-        element.addEventListener('touchstart', handleTouchStart, { passive: true });
-        element.addEventListener('touchend', handleTouchEnd);
-    });
-}
-
-// Touch handlers with improved feedback
-function handleTouchStart(e) {
-    // Add visual feedback class
-    this.classList.add('button-active');
-    
-    // For selection boxes in the game, add extra visual emphasis
-    if (this.classList.contains('selection-box')) {
-        this.style.transform = 'scale(0.98)';
-        this.style.transition = 'transform 0.1s ease-in-out';
-    }
-}
-
-function handleTouchEnd(e) {
-    // Remove visual feedback
-    this.classList.remove('button-active');
-    
-    // Reset any additional styles we added
-    if (this.classList.contains('selection-box')) {
-        this.style.transform = '';
-    }
-    
-    // Prevent default behavior for buttons to avoid delay
-    if (this.tagName.toLowerCase() === 'button' || this.classList.contains('selection-box') || this.classList.contains('header-btn')) {
-        e.preventDefault();
-    }
-}
-
-// Enhanced iOS fix function with improved element positioning
+// Enhanced iOS fix function
 function fixIOSIssues() {
     // Check if we're on iOS
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
@@ -652,112 +503,15 @@ function fixIOSIssues() {
         // Add iOS-specific class to body
         document.body.classList.add('ios-device');
         
-        // Fix for iOS input focusing issues
-        const inputs = document.querySelectorAll('input, textarea');
-        inputs.forEach(input => {
-            input.addEventListener('focus', function() {
-                // Add padding to bottom of page to prevent content from being hidden behind keyboard
-                // Use setTimeout to ensure this happens after keyboard appears
-                setTimeout(() => {
-                    document.body.style.paddingBottom = '150px';
-                    // Scroll to the focused input
-                    this.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 300);
-            });
-            
-            input.addEventListener('blur', function() {
-                // Remove padding when keyboard is hidden
-                document.body.style.paddingBottom = '0';
-            });
-        });
-        
         // Fix for double-tap zoom on buttons
         const allButtons = document.querySelectorAll('button, .selection-box, .header-btn');
         allButtons.forEach(button => {
             button.style.touchAction = 'manipulation';
+            button.style.webkitTapHighlightColor = 'transparent';
         });
-        
-        // Fix for iOS Safari overlapping elements - adjust z-index
-        // Ensure notification doesn't get hidden
-        const notification = document.getElementById('notification');
-        if (notification) {
-            notification.style.zIndex = '1000';
-        }
-        
-        // Ensure game over overlay appears on top
-        const gameOverOverlay = document.getElementById('gameOverOverlay');
-        if (gameOverOverlay) {
-            gameOverOverlay.style.zIndex = '1001';
-        }
-        
-        // Handle iOS-specific positioning for selection boxes
-        adjustIOSSelectionBoxes();
         
         // Fix iOS scrolling issues
         document.body.style.webkitOverflowScrolling = 'touch';
-        
-        // Prevent scrolling when interacting with game elements
-        preventIOSScrollingIssues();
-    }
-}
-
-// Function to adjust selection boxes specifically for iOS
-function adjustIOSSelectionBoxes() {
-    const selectionBoxes = document.querySelectorAll('.selection-box');
-    if (selectionBoxes.length > 0) {
-        selectionBoxes.forEach((box, index) => {
-            // Add iOS-specific styling
-            box.classList.add('ios-selection-box');
-            
-            // Ensure proper spacing between boxes
-            box.style.marginBottom = '15px';
-            
-            // Adjust box heights for better touch targets
-            box.style.minHeight = '60px';
-            
-            // Ensure text doesn't overflow
-            const textElement = box.querySelector('p');
-            if (textElement) {
-                textElement.style.maxWidth = '100%';
-                textElement.style.overflow = 'hidden';
-                textElement.style.textOverflow = 'ellipsis';
-            }
-        });
-        
-        // Adjust container to prevent boxes from overlapping
-        const container = document.querySelector('.selection-container');
-        if (container) {
-            container.style.display = 'flex';
-            container.style.flexDirection = 'column';
-            container.style.gap = '12px';
-            container.style.paddingBottom = '20px'; // Add padding at bottom
-        }
-    }
-}
-
-// Function to prevent iOS scrolling issues during game play
-function preventIOSScrollingIssues() {
-    const gameContent = document.querySelector('.game-content');
-    if (gameContent) {
-        // Prevent scroll when touching game elements
-        gameContent.addEventListener('touchmove', function(e) {
-            // Only prevent default if not on an actual scrollable element
-            if (!e.target.closest('.scrollable-area')) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-    }
-    
-    // Fix for iOS mobile controls
-    const mobileControls = document.querySelector('.mobile-controls-container');
-    if (mobileControls) {
-        // Ensure controls are visible and don't overlap
-        mobileControls.style.position = 'sticky';
-        mobileControls.style.top = '0';
-        mobileControls.style.zIndex = '100';
-        mobileControls.style.backgroundColor = 'var(--bg-color)'; // Match page background
-        mobileControls.style.paddingTop = '10px';
-        mobileControls.style.paddingBottom = '10px';
     }
 }
 
@@ -840,53 +594,11 @@ function setDifficulty(difficulty) {
         btn.classList.remove('active');
     });
     
-    document.getElementById(`${difficulty}Btn`).classList.add('active');
-}
-
-// Function to reposition game elements based on screen size
-function repositionGameElements() {
-    const isMobile = window.innerWidth <= 768;
-    const gameContent = document.querySelector('.game-content');
-    
-    if (gameContent) {
-        if (isMobile) {
-            // Rearrange elements for mobile layout
-            const menuBtn = document.getElementById('menuButton');
-            const scoreDisplay = document.querySelector('.score-display');
-            const difficultyDisplay = document.querySelector('.difficulty-display');
-            
-            if (menuBtn && scoreDisplay && difficultyDisplay) {
-                // Move elements to the start of game content
-                gameContent.prepend(difficultyDisplay);
-                gameContent.prepend(scoreDisplay);
-                gameContent.prepend(menuBtn);
-            }
-        }
+    const targetBtn = document.getElementById(`${difficulty}Btn`);
+    if (targetBtn) {
+        targetBtn.classList.add('active');
     }
 }
-
-// DOM Observer to watch for content changes
-const observeDOM = (function(){
-    const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-    
-    return function(obj, callback){
-        if(!obj || obj.nodeType !== 1) return; 
-        
-        if(MutationObserver){
-            // Define a new observer
-            const mutationObserver = new MutationObserver(callback);
-            
-            // Have the observer observe the element for changes in children
-            mutationObserver.observe(obj, { childList:true, subtree:true });
-            return mutationObserver;
-        }
-        // No MutationObserver support, fall back to DOMNodeInserted
-        else if(window.addEventListener){
-            obj.addEventListener('DOMNodeInserted', callback, false);
-            obj.addEventListener('DOMNodeRemoved', callback, false);
-        }
-    };
-})();
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
@@ -895,6 +607,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Make sure it's hidden initially
     toggleHeaderMenuButton(false);
+    
     // Add CSS for animations
     const style = document.createElement('style');
     style.textContent = `
@@ -911,9 +624,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Set mobile viewport height
     setMobileViewportHeight();
-    
-    // Add touch event listeners
-    enhanceTouchInteraction();
     
     // Fix iOS-specific issues
     fixIOSIssues();
@@ -941,41 +651,37 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.add('touchscreen');
     }
     
-    // Observe changes to the page content and enhance touch interactions
-    observeDOM(document.getElementById('pageContent'), function(mutations) {
-        // Add a small delay to ensure the DOM is fully updated
-        setTimeout(enhanceTouchInteraction, 50);
-    });
-    
     // Theme toggle functionality
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
     
-    // Check for saved theme preference or use preferred color scheme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        body.classList.add('dark-theme');
-        themeToggle.textContent = '☀️';
-    } else if (savedTheme === 'light') {
-        body.classList.remove('dark-theme');
-        themeToggle.textContent = '🌙';
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        body.classList.add('dark-theme');
-        themeToggle.textContent = '☀️';
-    }
-    
-    // Toggle theme
-    themeToggle.addEventListener('click', () => {
-        if (body.classList.contains('dark-theme')) {
-            body.classList.remove('dark-theme');
-            themeToggle.textContent = '🌙';
-            localStorage.setItem('theme', 'light');
-        } else {
+    if (themeToggle) {
+        // Check for saved theme preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
             body.classList.add('dark-theme');
             themeToggle.textContent = '☀️';
-            localStorage.setItem('theme', 'dark');
+        } else if (savedTheme === 'light') {
+            body.classList.remove('dark-theme');
+            themeToggle.textContent = '🌙';
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            body.classList.add('dark-theme');
+            themeToggle.textContent = '☀️';
         }
-    });
+        
+        // Toggle theme with improved mobile handling
+        handleMobileButtonClick(themeToggle, () => {
+            if (body.classList.contains('dark-theme')) {
+                body.classList.remove('dark-theme');
+                themeToggle.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.add('dark-theme');
+                themeToggle.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    }
     
     // Add event listeners for resizing and orientation change
     window.addEventListener('resize', setMobileViewportHeight);
@@ -984,24 +690,48 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(setMobileViewportHeight, 100);
     });
     
-    // Add event listener for play again button
-    document.getElementById('playAgainButton').addEventListener('click', () => {
-        document.getElementById('gameOverOverlay').classList.remove('show');
-        navigateTo('home');
-    });
+    // Add event listener for play again button with improved mobile handling
+    const playAgainButton = document.getElementById('playAgainButton');
+    if (playAgainButton) {
+        handleMobileButtonClick(playAgainButton, () => {
+            document.getElementById('gameOverOverlay').classList.remove('show');
+            navigateTo('home');
+        });
+    }
     
-    // Add event listener for share score button
-    document.getElementById('shareScoreButton').addEventListener('click', () => {
-        const shareableText = generateShareableScore();
-        
-        // Copy to clipboard
-        navigator.clipboard.writeText(shareableText)
-            .then(() => {
-                showCopyNotification();
-            })
-            .catch(err => {
-                console.error('Could not copy text: ', err);
-                alert('Failed to copy to clipboard. Please try again.');
-            });
-    });
+    // Add event listener for share score button with improved mobile handling
+    const shareScoreButton = document.getElementById('shareScoreButton');
+    if (shareScoreButton) {
+        handleMobileButtonClick(shareScoreButton, () => {
+            const shareableText = generateShareableScore();
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(shareableText)
+                .then(() => {
+                    showCopyNotification();
+                })
+                .catch(err => {
+                    console.error('Could not copy text: ', err);
+                    
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = shareableText;
+                    textArea.style.position = 'fixed';
+                    textArea.style.left = '-999999px';
+                    textArea.style.top = '-999999px';
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    
+                    try {
+                        document.execCommand('copy');
+                        showCopyNotification();
+                    } catch (err) {
+                        alert('Failed to copy to clipboard. Please try again.');
+                    }
+                    
+                    document.body.removeChild(textArea);
+                });
+        });
+    }
 });
