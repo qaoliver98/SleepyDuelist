@@ -56,6 +56,9 @@ function showGameOver() {
         difficulty: currentDifficulty
     };
     
+    // Save to localStorage for persistence
+    saveScoreToStorage(lastScore);
+    
     // Add event listeners for game over buttons after showing overlay
     setTimeout(() => {
         const playAgainButton = document.getElementById('playAgainButton');
@@ -232,6 +235,12 @@ const pages = {
                 <p style="margin-bottom: 1.5rem; font-size: 1.2rem;">Test your knowledge by identifying real Yu-Gi-Oh! cards! Click on the box with the card's name that you think is real. Good luck!</p>
                 
                 ${lastScoreHTML}
+
+                ${lastScore ? `
+                    <button id="clearScoreBtn" class="clear-score-btn" style="margin-top: 1rem; padding: 0.5rem 1rem; background-color: var(--light-pink); color: var(--dark-purple); border: none; border-radius: 0.25rem; cursor: pointer; font-size: 0.9rem;">
+                        Clear Score History
+                    </button>
+                ` : ''}
                 
                 <div>
                     <p style="margin-bottom: 1rem; font-size: 1.1rem; font-weight: bold;">Select Difficulty:</p>
@@ -384,6 +393,16 @@ function navigateTo(page) {
                 navigateTo('selection');
             });
         }
+
+    // Add after the other button event listeners in the home page section
+    const clearScoreBtn = document.getElementById('clearScoreBtn');
+    if (clearScoreBtn) {
+        addClickListener(clearScoreBtn, () => {
+            clearSavedScore();
+            navigateTo('home'); // Refresh the page to hide the score
+            showNotification('Score history cleared!', true);
+        });
+    }
         
     } else if (page === 'selection') {
         // Add click event for menu button
@@ -663,6 +682,38 @@ function setDifficulty(difficulty) {
     }
 }
 
+// Function to save score to localStorage
+function saveScoreToStorage(scoreData) {
+    try {
+        localStorage.setItem('sleepyDuelistLastScore', JSON.stringify(scoreData));
+    } catch (error) {
+        console.warn('Could not save score to localStorage:', error);
+    }
+}
+
+// Function to load score from localStorage
+function loadScoreFromStorage() {
+    try {
+        const savedScore = localStorage.getItem('sleepyDuelistLastScore');
+        if (savedScore) {
+            return JSON.parse(savedScore);
+        }
+    } catch (error) {
+        console.warn('Could not load score from localStorage:', error);
+    }
+    return null;
+}
+
+// Function to clear saved score (optional - for testing or reset functionality)
+function clearSavedScore() {
+    try {
+        localStorage.removeItem('sleepyDuelistLastScore');
+        lastScore = null;
+    } catch (error) {
+        console.warn('Could not clear saved score:', error);
+    }
+}
+
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize the header menu button
@@ -698,6 +749,12 @@ document.addEventListener('DOMContentLoaded', function() {
         copyNotification.className = 'copy-notification';
         copyNotification.textContent = 'Score copied to clipboard!';
         document.body.appendChild(copyNotification);
+    }
+
+    // Load saved score from localStorage
+    const savedScore = loadScoreFromStorage();
+    if (savedScore) {
+        lastScore = savedScore;
     }
     
     // Check if card lists are available
