@@ -21950,7 +21950,7 @@ const fakeYugiohCards = [
 "Mind Magatama",
 "Mind of Gambler",
 "Mind Pol Soldier",
-"Mind Protof Darkness",
+"Mind of Darkness",
 "Mind Ring",
 "Mind the Flame",
 "Mind Tribe",
